@@ -17,8 +17,8 @@ _build/
   build.py         Generates the HTML pages from content.py
   art/*.svg        Schematic illustrations used on project cards and pages
 assets/
-  css/style.css    Styles (motorsport theme: black / race red / white)
-  js/main.js       Menu, scroll progress, reveal animations, copy-email button
+  css/style.css    Styles ("cockpit telemetry" theme: graphite / lime)
+  js/main.js       Menu, shift-light scroll progress, session clock, reveals, copy email
   img/             Profile photo, favicon, social share image (og.png)
   resume/          James-Kurtis-Resume.pdf
 index.html         Home page             (generated)
@@ -68,3 +68,9 @@ python -m http.server 8000
 ```
 
 then open http://localhost:8000.
+
+## Themes
+
+The site uses the **Cockpit telemetry** theme (race-car dash display). The earlier
+**Motorsport bold** theme (black / race red / white livery) is saved as the git tag
+`theme-motorsport`, so it can be restored at any time.

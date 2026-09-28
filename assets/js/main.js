@@ -7,16 +7,17 @@
     el.textContent = new Date().getFullYear();
   });
 
-  // Nav background + scroll progress bar
+  // Nav background + shift lights (scroll progress)
   const nav = doc.querySelector("[data-nav]");
-  const bar = doc.querySelector(".progress span");
+  const leds = doc.querySelectorAll(".shift i");
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
     if (nav) nav.classList.toggle("is-scrolled", y > 8);
-    if (bar) {
+    if (leds.length) {
       const max = root.scrollHeight - window.innerHeight;
-      bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+      const lit = max > 0 ? Math.round((Math.min(1, y / max)) * leds.length) : 0;
+      leds.forEach((led, i) => led.classList.toggle("lit", i < lit));
     }
     ticking = false;
   };
@@ -95,6 +96,19 @@
       }
     });
   });
+
+  // Session clock in the hero dash (time on page)
+  const clock = doc.querySelector("[data-clock]");
+  if (clock) {
+    const start = Date.now();
+    const pad = (n) => String(n).padStart(2, "0");
+    const tick = () => {
+      const s = Math.floor((Date.now() - start) / 1000);
+      clock.textContent = `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
 
   // Résumé: fall back to buttons when the browser has no inline PDF viewer
   const pdf = doc.querySelector("[data-pdf]");

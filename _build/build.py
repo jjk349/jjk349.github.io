@@ -6,8 +6,11 @@ Static site generator for the portfolio. No dependencies beyond Python 3.8+.
 Reads _build/content.py and _build/art/*.svg and writes the site into the
 repository root (index.html, resume.html, 404.html, projects/*.html,
 sitemap.xml). Commit the generated files; GitHub Pages serves them as-is.
+
+Theme: "Cockpit telemetry" (race-car dash display).
 """
 
+import math
 import re
 import sys
 from pathlib import Path
@@ -17,13 +20,14 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
 from content import (  # noqa: E402
-    ABOUT, CATEGORIES, EDUCATION, EXPERIENCE, INTERESTS, LEADERSHIP, PROJECTS,
-    SITE, SKILLS, TELEMETRY,
+    ABOUT, CATEGORIES, DASH_BAR, EDUCATION, EXPERIENCE, GAUGES, INTERESTS, LEADERSHIP,
+    PROJECTS, SITE, SKILLS,
 )
 
 FONTS = (
     "https://fonts.googleapis.com/css2?"
-    "family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900"
+    "family=Oxanium:wght@400..800"
+    "&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400"
     "&family=JetBrains+Mono:wght@400;500;700&display=swap"
 )
 
@@ -62,6 +66,13 @@ def art(name, uid, label=None):
     return svg.replace("<svg ", f"<svg {attrs} ", 1)
 
 
+def corners():
+    return (
+        '<span class="vf tl" aria-hidden="true"></span><span class="vf tr" aria-hidden="true"></span>'
+        '<span class="vf bl" aria-hidden="true"></span><span class="vf br" aria-hidden="true"></span>'
+    )
+
+
 # ---------------------------------------------------------------------------
 # Shell
 # ---------------------------------------------------------------------------
@@ -71,7 +82,7 @@ def nav(root, home):
     return f"""<header class="nav" data-nav>
   <div class="wrap nav-inner">
     <a class="brand" href="{root or './'}" aria-label="{SITE['name']}, home">
-      <span class="brand-mark">JK</span><span class="brand-name">{SITE['name']}</span>
+      <span class="brand-mark">JK</span><span class="brand-name">{SITE['name']}<span class="brand-sub"> // telemetry</span></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
       <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
@@ -81,7 +92,7 @@ def nav(root, home):
       <a href="{base}#experience">Experience</a>
       <a href="{base}#about">About</a>
       <a href="{base}#contact">Contact</a>
-      <a class="btn btn-sm btn-red" href="{root}resume.html">R&eacute;sum&eacute;</a>
+      <a class="btn btn-sm btn-primary" href="{root}resume.html">R&eacute;sum&eacute;</a>
     </nav>
   </div>
 </header>"""
@@ -89,7 +100,7 @@ def nav(root, home):
 
 def footer(root):
     return f"""<footer class="footer">
-  <div class="checker" aria-hidden="true"></div>
+  <div class="sectors" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap footer-inner">
     <span>&copy; <span data-year>2026</span> {SITE['name']}</span>
     <span class="footer-links">
@@ -103,6 +114,7 @@ def footer(root):
 
 
 def page(*, title, description, body, root="", path="", home=False, body_class=""):
+    leds = "".join("<i></i>" for _ in range(15))
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +123,7 @@ def page(*, title, description, body, root="", path="", home=False, body_class="
 <title>{title}</title>
 <meta name="description" content="{description}">
 <meta name="author" content="{SITE['name']}">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#0a0c0b">
 <link rel="canonical" href="{SITE['url']}{path}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{SITE['name']}">
@@ -132,7 +144,7 @@ def page(*, title, description, body, root="", path="", home=False, body_class="
 </head>
 <body class="{body_class}" id="top">
 <a class="skip" href="#main">Skip to content</a>
-<div class="progress" aria-hidden="true"><span></span></div>
+<div class="shift" aria-hidden="true">{leds}</div>
 {nav(root, home)}
 <main id="main">
 {body}
@@ -147,54 +159,129 @@ def page(*, title, description, body, root="", path="", home=False, body_class="
 # Home page pieces
 # ---------------------------------------------------------------------------
 
+def gauge(g):
+    label = f'<p class="g-label">{g["label"]}</p>'
+    if g["type"] == "gauge":
+        cx, cy, r = 60, 62, 48
+        ticks = []
+        for k in range(11):
+            a = math.radians(180 - k * 18)
+            r1, r2 = (36, 42) if k % 5 else (33, 42)
+            ticks.append(
+                f"M{cx + r1 * math.cos(a):.1f} {cy - r1 * math.sin(a):.1f}"
+                f"L{cx + r2 * math.cos(a):.1f} {cy - r2 * math.sin(a):.1f}"
+            )
+        lit = round(g["fill"] * 100, 1)
+        ang = 180 - g["fill"] * 180
+        nx = cx + 40 * math.cos(math.radians(ang))
+        ny = cy - 40 * math.sin(math.radians(ang))
+        arc = f"M{cx - r} {cy} A{r} {r} 0 0 1 {cx + r} {cy}"
+        svg = f"""<svg class="g-svg" viewBox="0 0 120 70" aria-hidden="true" style="--turn:{g['fill'] * 180:.1f}deg">
+      <path class="g-track" d="{arc}" pathLength="100"/>
+      <path class="g-cut" d="{arc}" pathLength="100" stroke-dasharray="0 {lit} {100 - lit} 100"/>
+      <path class="g-lit" d="{arc}" pathLength="100" stroke-dasharray="{lit} 100"/>
+      <path class="g-ticks" d="{' '.join(ticks)}"/>
+      <line class="g-needle" x1="{cx}" y1="{cy}" x2="{nx:.1f}" y2="{ny:.1f}"/>
+      <circle class="g-hub" cx="{cx}" cy="{cy}" r="4"/>
+    </svg>"""
+        return f"""<div class="g g-arc">
+    {label}
+    <div class="g-row">{svg}<div><p class="g-value">{g['value']}</p><p class="g-unit">{g['unit']}</p><p class="g-note">{g.get('note', '')}</p></div></div>
+  </div>"""
+    value = g["value"]
+    if value == "auto":
+        value = num(len(PROJECTS))
+    if g["type"] == "status":
+        return f"""<div class="g g-status">
+    {label}
+    <p class="g-value"><span class="led on" aria-hidden="true"></span>{value}</p>
+    <p class="g-unit">{g['unit']}</p>
+  </div>"""
+    return f"""<div class="g g-digital">
+    {label}
+    <p class="g-value">{value}</p>
+    <p class="g-unit">{g['unit']}</p>
+  </div>"""
+
+
 def hero():
-    tele = "\n".join(
-        f'      <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in TELEMETRY
-    )
+    bar = "".join(f'<span class="db-item"><b>{k}</b> {v}</span>' for k, v in DASH_BAR)
+    gauges = "\n  ".join(gauge(g) for g in GAUGES)
     return f"""<section class="hero" aria-labelledby="hero-name">
-  <div class="hero-livery" aria-hidden="true"><span></span><span></span><span></span></div>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{SITE['title']}</p>
-      <h1 id="hero-name" class="hero-name"><span class="l1">{SITE['first']}</span><span class="l2">{SITE['last']}</span></h1>
-      <p class="hero-lede">{SITE['lede']}</p>
-      <div class="hero-cta">
-        <a class="btn btn-red" href="#work">See the work {ICONS['arrow']}</a>
-        <a class="btn btn-ghost" href="{SITE['resume_pdf']}" download>R&eacute;sum&eacute; {ICONS['download']}</a>
-      </div>
-      <ul class="socials" aria-label="Contact links">
-        <li><a href="mailto:{SITE['email']}">{ICONS['mail']}<span>{SITE['email']}</span></a></li>
-        <li><a href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']}<span>LinkedIn</span></a></li>
-      </ul>
-    </div>
-    <figure class="hero-photo">
-      <div class="photo-frame">
-        <img src="{SITE['photo']}" alt="Portrait of {SITE['name']}" width="693" height="1145" fetchpriority="high">
-      </div>
-      <div class="plate" aria-hidden="true"><span class="plate-num">{SITE['class_year']}</span><span class="plate-lbl">Cornell</span></div>
-      <figcaption>{SITE['location']} &nbsp;/&nbsp; Class of 20{SITE['class_year']}</figcaption>
-    </figure>
-  </div>
   <div class="wrap">
-    <dl class="telemetry">
-{tele}
-    </dl>
+    <div class="dash">
+      <div class="dash-bar" aria-hidden="true">
+        <span class="db-live"><span class="led on"></span>Live</span>
+        {bar}
+        <span class="db-clock">Session <b data-clock>00:00</b></span>
+      </div>
+      <div class="dash-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{SITE['title']}</p>
+          <h1 id="hero-name" class="hero-name"><span class="l1">{SITE['first']}</span><span class="l2">{SITE['last']}<span class="cursor" aria-hidden="true"></span></span></h1>
+          <p class="hero-lede">{SITE['lede']}</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#work">See the work {ICONS['arrow']}</a>
+            <a class="btn btn-ghost" href="{SITE['resume_pdf']}" download>R&eacute;sum&eacute; {ICONS['download']}</a>
+          </div>
+          <ul class="socials" aria-label="Contact links">
+            <li><a href="mailto:{SITE['email']}">{ICONS['mail']}<span>{SITE['email']}</span></a></li>
+            <li><a href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']}<span>LinkedIn</span></a></li>
+          </ul>
+        </div>
+        <figure class="cam">
+          <div class="cam-frame">
+            <img src="{SITE['photo']}" alt="Portrait of {SITE['name']}" width="693" height="1145" fetchpriority="high">
+            <div class="cam-hud" aria-hidden="true"><span class="cam-rec"><i></i>Rec</span><span>Cam 01 / Onboard</span></div>
+            {corners()}
+          </div>
+          <figcaption><span>{SITE['location']}</span><span>Class of 20{SITE['class_year']}</span></figcaption>
+        </figure>
+      </div>
+      <div class="gauges">
+  {gauges}
+      </div>
+    </div>
   </div>
 </section>"""
 
 
-def ticker():
-    words = [strip_tags(p["title"]) for p in PROJECTS] + ["Cornell Racing"]
-    items = "".join(f'<span class="ticker-item">{w}</span>' for w in words)
-    return f"""<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">{items}{items}</div>
+def trace():
+    """A decorative lap trace (speed + brake channels) used as a divider."""
+    W, top, span = 1200, 16, 70
+    speed_pts, brake_pts = [], []
+    prev = None
+    for x in range(0, W + 1, 6):
+        t = x / W
+        s = 0.55 + 0.3 * math.sin(2 * math.pi * 3.2 * t + 0.5) + 0.1 * math.sin(2 * math.pi * 8.1 * t + 1.3)
+        y = top + (1 - s) * span
+        speed_pts.append(f"{x},{y:.1f}")
+        braking = prev is not None and (y - prev) > 1.6
+        brake_pts.append(f"{x},{104 if braking else 118}")
+        prev = y
+    sectors = "".join(
+        f'<line class="t-sector s{i}" x1="{x}" y1="6" x2="{x}" y2="122"/>'
+        f'<text class="t-label" x="{x + 6}" y="16">S{i}</text>'
+        for i, x in ((1, 400), (2, 800))
+    )
+    return f"""<div class="trace reveal" aria-hidden="true">
+  <div class="wrap">
+    <div class="trace-head"><span><i class="k-speed"></i>Speed</span><span><i class="k-brake"></i>Brake</span><span class="trace-lap">Lap trace</span></div>
+    <svg class="trace-svg" viewBox="0 0 1200 124">
+      <path class="t-grid" d="M0 31H1200M0 62H1200M0 93H1200"/>
+      {sectors}
+      <polyline class="t-brake" points="{' '.join(brake_pts)}" pathLength="1"/>
+      <polyline class="t-speed" points="{' '.join(speed_pts)}" pathLength="1"/>
+      <line class="t-cursor" x1="0" y1="0" x2="0" y2="124"/>
+    </svg>
+  </div>
 </div>"""
 
 
 def sec_head(n, kicker, title, hid, intro=None):
     intro_html = f'\n    <p class="sec-intro">{intro}</p>' if intro else ""
     return f"""<header class="sec-head reveal">
-    <span class="sec-num" aria-hidden="true">{n}</span>
+    <span class="sec-num" aria-hidden="true"><small>CH</small>{n}</span>
     <div class="sec-titles">
       <p class="kicker">{kicker}</p>
       <h2 id="{hid}" class="sec-title">{title}</h2>
@@ -208,18 +295,18 @@ def card(p, index, delay):
     art_html = art(p["art"], f"card{index}")
     if p["status"] == "full":
         return f"""<a class="card reveal" style="--i:{delay}" href="projects/{p['slug']}.html">
+  <div class="card-bar"><span class="led on" aria-hidden="true"></span><span class="card-ch">CH {n}</span><span class="card-tags">{tags}</span></div>
   <div class="card-art">{art_html}</div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">{n}</span><span class="card-tags">{tags}</span></div>
     <h3 class="card-title">{p['title']}</h3>
     <p class="card-sum">{p['summary']}</p>
-    <div class="card-foot"><span class="readout">{p['readout']}</span><span class="card-go">Read {ICONS['arrow']}</span></div>
+    <div class="card-foot"><span class="readout">{p['readout']}</span><span class="card-go">Open {ICONS['arrow']}</span></div>
   </div>
 </a>"""
     return f"""<article class="card is-stub reveal" style="--i:{delay}">
+  <div class="card-bar"><span class="led pit" aria-hidden="true"></span><span class="card-ch">CH {n}</span><span class="card-tags">{tags}</span></div>
   <div class="card-art">{art_html}<span class="pitboard">In the garage</span></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">{n}</span><span class="card-tags">{tags}</span></div>
     <h3 class="card-title">{p['title']}</h3>
     <p class="card-sum">{p.get('summary', '')}</p>
     <div class="card-foot"><span class="readout muted">Write-up coming soon</span></div>
@@ -270,7 +357,7 @@ def experience(n):
     lead = [tower_row(f"P{offset + i}", e) for i, e in enumerate(LEADERSHIP, start=1)]
     return f"""<section class="section" id="experience" aria-labelledby="exp-h">
   <div class="wrap">
-  {sec_head(num(n), "Timing tower &nbsp;/&nbsp; Tap a row for details", "Experience", "exp-h")}
+  {sec_head(num(n), "Timing screen &nbsp;/&nbsp; Tap a row for details", "Experience", "exp-h")}
   <div class="tower reveal">
     <div class="tower-head" aria-hidden="true"><span>Pos</span><span>Team</span><span>Role</span><span>Interval</span><span></span></div>
     {''.join(rows)}
@@ -325,17 +412,33 @@ def about(n):
 
 
 def contact(n):
-    return f"""<section class="contact" id="contact" aria-labelledby="contact-h">
-  <div class="contact-livery" aria-hidden="true"><span></span><span></span></div>
-  <div class="wrap contact-inner">
-    <p class="kicker">{num(n)} &nbsp;/&nbsp; Contact</p>
-    <h2 id="contact-h" class="contact-title">Let&rsquo;s build something fast.</h2>
-    <p class="contact-sub">{SITE['availability']} for summer internships. Email is the quickest way to reach me.</p>
-    <div class="contact-actions">
-      <a class="btn btn-ink" href="mailto:{SITE['email']}">{ICONS['mail']} Email me</a>
-      <button class="btn btn-ink-ghost" type="button" data-copy="{SITE['email']}">{ICONS['copy']} <span class="as-text" data-copy-label>{SITE['email']}</span></button>
-      <a class="btn btn-ink-ghost" href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']} LinkedIn</a>
-      <a class="btn btn-ink-ghost" href="resume.html">{ICONS['doc']} R&eacute;sum&eacute;</a>
+    wave = "".join(f'<i style="--d:{(k * 37) % 11 / 10:.1f}s"></i>' for k in range(28))
+    scope = "".join(
+        f'<i style="--h:{0.18 + 0.82 * abs(math.sin(k * 0.55) * math.cos(k * 0.17)):.2f};--d:{(k * 53) % 13 / 10:.1f}s"></i>'
+        for k in range(44)
+    )
+    return f"""<section class="contact section" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="radio reveal">
+      <div class="radio-bar"><span class="led on" aria-hidden="true"></span><span>Pit radio &nbsp;/&nbsp; Channel open</span><span class="wave" aria-hidden="true">{wave}</span></div>
+      <div class="radio-body">
+        <div class="radio-copy">
+        <p class="kicker">CH {num(n)} &nbsp;/&nbsp; Contact</p>
+        <h2 id="contact-h" class="contact-title">Let&rsquo;s build something <span class="hl">fast.</span></h2>
+        <p class="contact-sub">{SITE['availability']} for summer internships. Email is the quickest way to reach me.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:{SITE['email']}">{ICONS['mail']} Email me</a>
+          <button class="btn btn-ghost" type="button" data-copy="{SITE['email']}">{ICONS['copy']} <span class="as-text" data-copy-label>{SITE['email']}</span></button>
+          <a class="btn btn-ghost" href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']} LinkedIn</a>
+          <a class="btn btn-ghost" href="resume.html">{ICONS['doc']} R&eacute;sum&eacute;</a>
+        </div>
+        </div>
+        <div class="scope" aria-hidden="true">
+          <div class="scope-head"><span><span class="led on"></span>TX / J. Kurtis</span><span>RX / You</span></div>
+          <div class="scope-wave">{scope}</div>
+          <div class="scope-foot"><span>{SITE['location']}</span><span>{SITE['email']}</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>"""
@@ -345,7 +448,7 @@ def build_index():
     n_cats = len(CATEGORIES)
     body = "\n".join([
         hero(),
-        ticker(),
+        trace(),
         work_sections(),
         experience(n_cats + 1),
         about(n_cats + 2),
@@ -374,7 +477,7 @@ def project_page(p, index, prev_p, next_p):
     stats = ""
     if p.get("stats"):
         cells = "".join(
-            f'<div class="stat"><span class="stat-v">{v}</span><span class="stat-l">{l}</span></div>'
+            f'<div class="stat"><span class="stat-l">{l}</span><span class="stat-v">{v}</span></div>'
             for v, l in p["stats"]
         )
         stats = f'<div class="wrap"><div class="stats reveal">{cells}</div></div>'
@@ -410,26 +513,28 @@ def project_page(p, index, prev_p, next_p):
 
     body = f"""<article class="project">
   <header class="p-hero">
-    <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap">
       <a class="back" href="../#work">{ICONS['back']} All work</a>
       <div class="p-hero-grid">
         <div>
-          <p class="kicker">{cat} &nbsp;/&nbsp; Project {n}</p>
+          <p class="kicker"><span class="led on" aria-hidden="true"></span>{cat} &nbsp;/&nbsp; Project {n}</p>
           <h1 class="p-title">{p['title']}</h1>
           <p class="p-lede">{p['lede']}</p>
           <ul class="chips chips-tags">{tags}</ul>
         </div>
-        <span class="p-num" aria-hidden="true">{n}</span>
+        <span class="p-num" aria-hidden="true"><small>CH</small>{n}</span>
       </div>
-      <dl class="telemetry">
+      <dl class="readouts">
 {specs}
       </dl>
     </div>
   </header>
   <figure class="wrap p-art reveal">
-    <div class="p-art-frame">{art(p['art'], 'page', label=f"Schematic illustration for {strip_tags(p['title'])}")}</div>
-    <figcaption>Fig. {n} &nbsp;/&nbsp; Schematic illustration, not to scale</figcaption>
+    <div class="p-art-frame">
+      <div class="p-art-bar" aria-hidden="true"><span>Fig. {n}</span><span>Schematic &nbsp;/&nbsp; not to scale</span></div>
+      {art(p['art'], 'page', label=f"Schematic illustration for {strip_tags(p['title'])}")}
+      {corners()}
+    </div>
   </figure>
   {stats}
   <div class="wrap p-body">
@@ -464,14 +569,13 @@ def project_page(p, index, prev_p, next_p):
 def build_resume():
     pdf = SITE["resume_pdf"]
     body = f"""<section class="page-head">
-  <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap">
     <a class="back" href="./">{ICONS['back']} Home</a>
-    <p class="kicker">R&eacute;sum&eacute; &nbsp;/&nbsp; PDF</p>
+    <p class="kicker"><span class="led on" aria-hidden="true"></span>R&eacute;sum&eacute; &nbsp;/&nbsp; PDF</p>
     <h1 class="page-title">{SITE['name']}</h1>
     <p class="p-lede">{EDUCATION['degree']}, {EDUCATION['school']} &nbsp;&middot;&nbsp; {SITE['availability']}</p>
     <div class="actions">
-      <a class="btn btn-red" href="{pdf}" download>{ICONS['download']} Download PDF</a>
+      <a class="btn btn-primary" href="{pdf}" download>{ICONS['download']} Download PDF</a>
       <a class="btn btn-ghost" href="{pdf}" target="_blank" rel="noopener">{ICONS['external']} Open in new tab</a>
     </div>
   </div>
@@ -485,7 +589,7 @@ def build_resume():
       {ICONS['doc']}
       <p><strong>{SITE['name']} &mdash; R&eacute;sum&eacute;</strong><br>One page, PDF.</p>
       <div class="actions">
-        <a class="btn btn-red" href="{pdf}" target="_blank" rel="noopener">{ICONS['external']} Open PDF</a>
+        <a class="btn btn-primary" href="{pdf}" target="_blank" rel="noopener">{ICONS['external']} Open PDF</a>
         <a class="btn btn-ghost" href="{pdf}" download>{ICONS['download']} Download</a>
       </div>
     </div>
@@ -503,12 +607,11 @@ def build_resume():
 
 def build_404():
     body = f"""<section class="page-head dnf">
-  <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap">
-    <p class="kicker">Error 404</p>
+    <p class="kicker"><span class="led warn" aria-hidden="true"></span>Error 404 &nbsp;/&nbsp; Signal lost</p>
     <h1 class="dnf-title">DNF</h1>
     <p class="p-lede">This page didn&rsquo;t finish the race. It may have moved, or it never left the garage.</p>
-    <div class="actions"><a class="btn btn-red" href="/">{ICONS['back']} Back to the pits</a></div>
+    <div class="actions"><a class="btn btn-primary" href="/">{ICONS['back']} Back to the pits</a></div>
   </div>
 </section>"""
     return page(

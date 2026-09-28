@@ -32,12 +32,29 @@ SITE = {
     "class_year": "28",
 }
 
-# Four readouts under the hero, styled like race telemetry.
-TELEMETRY = [
+# The status bar across the top of the hero "dash".
+DASH_BAR = [
+    ("Car", "Cornell Racing FSAE"),
+    ("Driver", "J. Kurtis"),
     ("Role", "Cooling Sub-team Lead"),
-    ("Team", "Cornell Racing FSAE"),
-    ("Best gain", "&minus;1.0&nbsp;kg battery container"),
-    ("Status", "Available May&ndash;Aug 2027"),
+]
+
+# Readouts along the bottom of the hero "dash".
+#   type "gauge":   arc gauge; "fill" is how much of the arc is lit (0-1)
+#   type "digital": big number readout
+#   type "status":  status light + text
+GAUGES = [
+    {
+        "type": "gauge",
+        "label": "Battery container mass",
+        "value": "&minus;1.0",
+        "unit": "kg vs. previous design",
+        "fill": 0.90,
+        "note": "90% of previous mass",
+    },
+    {"type": "digital", "label": "Sub-team", "value": "5", "unit": "person cooling team, lead"},
+    {"type": "digital", "label": "Projects", "value": "auto", "unit": "on this site"},  # "auto" = count
+    {"type": "status", "label": "Status", "value": "Available", "unit": "May&ndash;Aug 2027"},
 ]
 
 ABOUT = [
