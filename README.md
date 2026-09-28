@@ -17,8 +17,8 @@ _build/
   build.py         Generates the HTML pages from content.py
   art/*.svg        Schematic illustrations used on project cards and pages
 assets/
-  css/style.css    Styles (motorsport theme: black / race red / white)
-  js/main.js       Menu, scroll progress, reveal animations, copy-email button
+  css/style.css    Styles (minimal theme: light, one Cornell-red accent)
+  js/main.js       Menu, scroll progress, reveals, line-drawn art, accordion, copy email
   img/             Profile photo, favicon, social share image (og.png)
   resume/          James-Kurtis-Resume.pdf
 index.html         Home page             (generated)
@@ -68,3 +68,11 @@ python -m http.server 8000
 ```
 
 then open http://localhost:8000.
+
+## Themes
+
+The site uses the **Minimal** theme (light page, black type, one red accent). Two
+earlier designs are saved in git and can be restored at any time:
+
+- `theme-motorsport` (tag): bold black / race red / white livery design
+- `theme-telemetry` (branch): dark race-car dashboard design

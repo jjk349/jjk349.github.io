@@ -6,7 +6,7 @@
 <title>Low Voltage Box &mdash; James Kurtis</title>
 <meta name="description" content="Designed the ARG25 low-voltage enclosure in CAD and proved out its fit with 3D-printed prototypes before building it for the car.">
 <meta name="author" content="James Kurtis">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#fafaf8">
 <link rel="canonical" href="https://jjk349.github.io/projects/low-voltage-box.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="James Kurtis">
@@ -20,7 +20,7 @@
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../assets/css/style.css">
 <script>document.documentElement.classList.add("js")</script>
 <script src="../assets/js/main.js" defer></script>
@@ -31,7 +31,7 @@
 <header class="nav" data-nav>
   <div class="wrap nav-inner">
     <a class="brand" href="../" aria-label="James Kurtis, home">
-      <span class="brand-mark">JK</span><span class="brand-name">James Kurtis</span>
+      <span class="brand-mark" aria-hidden="true"></span>James Kurtis
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
       <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
@@ -41,26 +41,20 @@
       <a href="../#experience">Experience</a>
       <a href="../#about">About</a>
       <a href="../#contact">Contact</a>
-      <a class="btn btn-sm btn-red" href="../resume.html">R&eacute;sum&eacute;</a>
+      <a class="btn btn-sm btn-outline" href="../resume.html">R&eacute;sum&eacute;</a>
     </nav>
   </div>
 </header>
 <main id="main">
 <article class="project">
   <header class="p-hero">
-    <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap">
       <a class="back" href="../#work"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg> All work</a>
-      <div class="p-hero-grid">
-        <div>
-          <p class="kicker">Cornell FSAE Racing &nbsp;/&nbsp; Project 04</p>
-          <h1 class="p-title">Low Voltage Box</h1>
-          <p class="p-lede">The ARG25 low-voltage box houses the electronics that control and monitor the car&rsquo;s high-voltage system. I designed the enclosure and took it from CAD to the car.</p>
-          <ul class="chips chips-tags"><li>Packaging</li><li>Prototyping</li></ul>
-        </div>
-        <span class="p-num" aria-hidden="true">04</span>
-      </div>
-      <dl class="telemetry">
+      <p class="kicker"><span class="sec-num">04</span>Cornell FSAE Racing</p>
+      <h1 class="p-title">Low Voltage Box</h1>
+      <p class="p-lede">The ARG25 low-voltage box houses the electronics that control and monitor the car&rsquo;s high-voltage system. I designed the enclosure and took it from CAD to the car.</p>
+      <ul class="chips chips-tags"><li>Packaging</li><li>Prototyping</li></ul>
+      <dl class="facts">
       <div><dt>Car</dt><dd>ARG25</dd></div>
       <div><dt>Role</dt><dd>Enclosure design</dd></div>
       <div><dt>Tools</dt><dd>CAD, 3D printing</dd></div>
@@ -69,7 +63,7 @@
     </div>
   </header>
   <figure class="wrap p-art reveal">
-    <div class="p-art-frame"><svg class="art-svg" role="img" aria-label="Schematic illustration for Low Voltage Box" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+    <div class="p-art-frame"><svg class="art-svg" data-draw role="img" aria-label="Schematic illustration for Low Voltage Box" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <path class="dim" d="M110 150 V98 M330 150 V98 M390 115 V63"/>
   <g class="ln">
     <path class="solid" d="M110 90 L170 55 H390 L330 90 Z"/>
@@ -98,12 +92,12 @@
   <text class="lbl" x="400" y="164">ENCL.</text>
   <text class="lbl" x="400" y="84">LID</text>
 </svg></div>
-    <figcaption>Fig. 04 &nbsp;/&nbsp; Schematic illustration, not to scale</figcaption>
+    <figcaption>Fig. 04 &nbsp;&middot;&nbsp; Schematic illustration, not to scale</figcaption>
   </figure>
   
   <div class="wrap p-body">
     <aside class="p-aside reveal">
-      <p class="kicker">Tools &amp; skills</p>
+      <p class="mini">Tools &amp; skills</p>
       <ul class="chips"><li>CAD</li><li>3D Printing</li><li>Rapid Prototyping</li><li>Packaging</li></ul>
     </aside>
     <div class="p-content">
@@ -113,12 +107,11 @@
   </div>
   <nav class="wrap p-nav" aria-label="More projects">
     <a class="prev" href="tractive-battery-container.html"><small>&larr; Previous</small><strong>Tractive Battery Container</strong></a>
-    <a class="next" href="dcir-cell-testing.html"><small>Next up &rarr;</small><strong>DCIR Cell Testing</strong></a>
+    <a class="next" href="dcir-cell-testing.html"><small>Next &rarr;</small><strong>DCIR Cell Testing</strong></a>
   </nav>
 </article>
 </main>
 <footer class="footer">
-  <div class="checker" aria-hidden="true"></div>
   <div class="wrap footer-inner">
     <span>&copy; <span data-year>2026</span> James Kurtis</span>
     <span class="footer-links">

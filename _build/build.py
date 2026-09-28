@@ -6,6 +6,8 @@ Static site generator for the portfolio. No dependencies beyond Python 3.8+.
 Reads _build/content.py and _build/art/*.svg and writes the site into the
 repository root (index.html, resume.html, 404.html, projects/*.html,
 sitemap.xml). Commit the generated files; GitHub Pages serves them as-is.
+
+Theme: "Minimal" (light, one red accent, interactive animations).
 """
 
 import re
@@ -17,21 +19,22 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
 from content import (  # noqa: E402
-    ABOUT, CATEGORIES, EDUCATION, EXPERIENCE, INTERESTS, LEADERSHIP, PROJECTS,
-    SITE, SKILLS, TELEMETRY,
+    ABOUT, CATEGORIES, EDUCATION, EXPERIENCE, FACTS, INTERESTS, LEADERSHIP, PROJECTS,
+    SITE, SKILLS,
 )
 
 FONTS = (
     "https://fonts.googleapis.com/css2?"
-    "family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900"
-    "&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    "family=Inter+Tight:wght@400;500;600;700"
+    "&family=Inter:wght@400;500"
+    "&family=JetBrains+Mono:wght@400;500&display=swap"
 )
 
 ICONS = {
     "arrow": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>',
+    "arrow-ne": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>',
     "back": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg>',
     "download": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>',
-    "external": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>',
     "mail": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>',
     "copy": '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></svg>',
     "linkedin": '<svg class="i i-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-1.8 3.44-1.8 3.68 0 4.2 2.2 4.2 5.06v6.24h-4v-5.5c0-1.32-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.9v5.6h-4v-11Z"/></svg>',
@@ -56,9 +59,9 @@ def art(name, uid, label=None):
     svg = re.sub(r'id="([^"]+)"', lambda m: f'id="{prefix}-{m.group(1)}"', svg)
     svg = re.sub(r"url\(#([^)]+)\)", lambda m: f"url(#{prefix}-{m.group(1)})", svg)
     if label:
-        attrs = f'class="art-svg" role="img" aria-label="{label}"'
+        attrs = f'class="art-svg" data-draw role="img" aria-label="{label}"'
     else:
-        attrs = 'class="art-svg" aria-hidden="true" focusable="false"'
+        attrs = 'class="art-svg" data-draw aria-hidden="true" focusable="false"'
     return svg.replace("<svg ", f"<svg {attrs} ", 1)
 
 
@@ -71,7 +74,7 @@ def nav(root, home):
     return f"""<header class="nav" data-nav>
   <div class="wrap nav-inner">
     <a class="brand" href="{root or './'}" aria-label="{SITE['name']}, home">
-      <span class="brand-mark">JK</span><span class="brand-name">{SITE['name']}</span>
+      <span class="brand-mark" aria-hidden="true"></span>{SITE['name']}
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
       <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
@@ -81,7 +84,7 @@ def nav(root, home):
       <a href="{base}#experience">Experience</a>
       <a href="{base}#about">About</a>
       <a href="{base}#contact">Contact</a>
-      <a class="btn btn-sm btn-red" href="{root}resume.html">R&eacute;sum&eacute;</a>
+      <a class="btn btn-sm btn-outline" href="{root}resume.html">R&eacute;sum&eacute;</a>
     </nav>
   </div>
 </header>"""
@@ -89,7 +92,6 @@ def nav(root, home):
 
 def footer(root):
     return f"""<footer class="footer">
-  <div class="checker" aria-hidden="true"></div>
   <div class="wrap footer-inner">
     <span>&copy; <span data-year>2026</span> {SITE['name']}</span>
     <span class="footer-links">
@@ -111,7 +113,7 @@ def page(*, title, description, body, root="", path="", home=False, body_class="
 <title>{title}</title>
 <meta name="description" content="{description}">
 <meta name="author" content="{SITE['name']}">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#fafaf8">
 <link rel="canonical" href="{SITE['url']}{path}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{SITE['name']}">
@@ -148,78 +150,62 @@ def page(*, title, description, body, root="", path="", home=False, body_class="
 # ---------------------------------------------------------------------------
 
 def hero():
-    tele = "\n".join(
-        f'      <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in TELEMETRY
-    )
+    facts = "\n".join(f"      <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in FACTS)
     return f"""<section class="hero" aria-labelledby="hero-name">
-  <div class="hero-livery" aria-hidden="true"><span></span><span></span><span></span></div>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{SITE['title']}</p>
-      <h1 id="hero-name" class="hero-name"><span class="l1">{SITE['first']}</span><span class="l2">{SITE['last']}</span></h1>
-      <p class="hero-lede">{SITE['lede']}</p>
-      <div class="hero-cta">
-        <a class="btn btn-red" href="#work">See the work {ICONS['arrow']}</a>
-        <a class="btn btn-ghost" href="{SITE['resume_pdf']}" download>R&eacute;sum&eacute; {ICONS['download']}</a>
-      </div>
-      <ul class="socials" aria-label="Contact links">
-        <li><a href="mailto:{SITE['email']}">{ICONS['mail']}<span>{SITE['email']}</span></a></li>
-        <li><a href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']}<span>LinkedIn</span></a></li>
-      </ul>
-    </div>
-    <figure class="hero-photo">
-      <div class="photo-frame">
-        <img src="{SITE['photo']}" alt="Portrait of {SITE['name']}" width="693" height="1145" fetchpriority="high">
-      </div>
-      <div class="plate" aria-hidden="true"><span class="plate-num">{SITE['class_year']}</span><span class="plate-lbl">Cornell</span></div>
-      <figcaption>{SITE['location']} &nbsp;/&nbsp; Class of 20{SITE['class_year']}</figcaption>
-    </figure>
-  </div>
   <div class="wrap">
-    <dl class="telemetry">
-{tele}
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>{SITE['title']}</p>
+        <h1 id="hero-name" class="hero-name"><span class="line"><span>{SITE['first']}</span></span><span class="line"><span>{SITE['last']}</span></span></h1>
+        <p class="hero-lede">{SITE['lede']}</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="#work">See the work {ICONS['arrow']}</a>
+          <a class="btn btn-outline" href="{SITE['resume_pdf']}" download>Download r&eacute;sum&eacute; {ICONS['download']}</a>
+        </div>
+        <ul class="socials" aria-label="Contact links">
+          <li><a href="mailto:{SITE['email']}">{ICONS['mail']}<span>{SITE['email']}</span></a></li>
+          <li><a href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']}<span>LinkedIn</span></a></li>
+        </ul>
+      </div>
+      <figure class="hero-photo">
+        <div class="photo-frame"><img src="{SITE['photo']}" alt="Portrait of {SITE['name']}" width="693" height="1145" fetchpriority="high"></div>
+      </figure>
+    </div>
+    <dl class="facts">
+{facts}
     </dl>
   </div>
 </section>"""
 
 
-def ticker():
-    words = [strip_tags(p["title"]) for p in PROJECTS] + ["Cornell Racing"]
-    items = "".join(f'<span class="ticker-item">{w}</span>' for w in words)
-    return f"""<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">{items}{items}</div>
-</div>"""
-
-
 def sec_head(n, kicker, title, hid, intro=None):
     intro_html = f'\n    <p class="sec-intro">{intro}</p>' if intro else ""
     return f"""<header class="sec-head reveal">
-    <span class="sec-num" aria-hidden="true">{n}</span>
     <div class="sec-titles">
-      <p class="kicker">{kicker}</p>
+      <p class="kicker"><span class="sec-num">{n}</span>{kicker}</p>
       <h2 id="{hid}" class="sec-title">{title}</h2>
     </div>{intro_html}
   </header>"""
 
 
 def card(p, index, delay):
-    tags = " / ".join(p["tags"])
+    tags = " &middot; ".join(p["tags"])
     n = num(index)
     art_html = art(p["art"], f"card{index}")
     if p["status"] == "full":
         return f"""<a class="card reveal" style="--i:{delay}" href="projects/{p['slug']}.html">
   <div class="card-art">{art_html}</div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">{n}</span><span class="card-tags">{tags}</span></div>
+    <p class="card-meta"><span class="card-num">{n}</span><span>{tags}</span></p>
     <h3 class="card-title">{p['title']}</h3>
     <p class="card-sum">{p['summary']}</p>
     <div class="card-foot"><span class="readout">{p['readout']}</span><span class="card-go">Read {ICONS['arrow']}</span></div>
   </div>
 </a>"""
     return f"""<article class="card is-stub reveal" style="--i:{delay}">
-  <div class="card-art">{art_html}<span class="pitboard">In the garage</span></div>
+  <div class="card-art">{art_html}<span class="soon"><span class="dot" aria-hidden="true"></span>In progress</span></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">{n}</span><span class="card-tags">{tags}</span></div>
+    <p class="card-meta"><span class="card-num">{n}</span><span>{tags}</span></p>
     <h3 class="card-title">{p['title']}</h3>
     <p class="card-sum">{p.get('summary', '')}</p>
     <div class="card-foot"><span class="readout muted">Write-up coming soon</span></div>
@@ -240,7 +226,7 @@ def work_sections():
         layout = {1: "grid grid-solo", 2: "grid grid-duo"}.get(len(items), "grid")
         out.append(f"""<section class="section" id="{cat['id']}" aria-labelledby="{cat['id']}-h">
   <div class="wrap">
-  {sec_head(num(ci), f"{cat['kicker']} &nbsp;/&nbsp; {count}", cat['name'], cat['id'] + '-h', cat['intro'])}
+  {sec_head(num(ci), count, cat['name'], cat['id'] + '-h', cat['intro'])}
   <div class="{layout}">
 {chr(10).join(cards)}
   </div>
@@ -249,33 +235,30 @@ def work_sections():
     return '<div id="work">\n' + "\n".join(out) + "\n</div>"
 
 
-def tower_row(pos, e, open_=False):
+def acc_row(e, open_=False):
     pts = "".join(f"<li>{x}</li>" for x in e["points"])
-    place = f'<p class="tower-place">{e["place"]}</p>' if e.get("place") else ""
-    return f"""<details class="tower-row"{' open' if open_ else ''}>
+    place = f'<p class="acc-place">{e["place"]}</p>' if e.get("place") else ""
+    return f"""<details class="acc"{' open' if open_ else ''}>
   <summary>
-    <span class="pos">{pos}</span>
     <span class="org">{e['org']}</span>
     <span class="role">{e['role']}</span>
     <span class="dates">{e['dates']}</span>
     <span class="toggle" aria-hidden="true"></span>
   </summary>
-  <div class="tower-detail">{place}<ul>{pts}</ul></div>
+  <div class="acc-body">{place}<ul>{pts}</ul></div>
 </details>"""
 
 
 def experience(n):
-    rows = [tower_row(f"P{i}", e, open_=(i == 1)) for i, e in enumerate(EXPERIENCE, start=1)]
-    offset = len(EXPERIENCE)
-    lead = [tower_row(f"P{offset + i}", e) for i, e in enumerate(LEADERSHIP, start=1)]
+    rows = "".join(acc_row(e, open_=(i == 0)) for i, e in enumerate(EXPERIENCE))
+    lead = "".join(acc_row(e) for e in LEADERSHIP)
     return f"""<section class="section" id="experience" aria-labelledby="exp-h">
   <div class="wrap">
-  {sec_head(num(n), "Timing tower &nbsp;/&nbsp; Tap a row for details", "Experience", "exp-h")}
-  <div class="tower reveal">
-    <div class="tower-head" aria-hidden="true"><span>Pos</span><span>Team</span><span>Role</span><span>Interval</span><span></span></div>
-    {''.join(rows)}
-    <div class="tower-divider">Leadership</div>
-    {''.join(lead)}
+  {sec_head(num(n), "Click a role for details", "Experience", "exp-h")}
+  <div class="exp reveal">
+    <div class="exp-group">{rows}</div>
+    <p class="exp-label">Leadership</p>
+    <div class="exp-group">{lead}</div>
   </div>
   </div>
 </section>"""
@@ -293,16 +276,16 @@ def about(n):
     )
     return f"""<section class="section" id="about" aria-labelledby="about-h">
   <div class="wrap">
-  {sec_head(num(n), "Driver profile", "About", "about-h")}
+  {sec_head(num(n), "Background", "About", "about-h")}
   <div class="about-grid">
     <div class="about-copy reveal">
       {paras}
-      <h3 class="mini">Off track</h3>
-      <ul class="chips chips-soft">{interests}</ul>
+      <h3 class="mini">Outside of engineering</h3>
+      <ul class="chips">{interests}</ul>
     </div>
     <div class="about-side">
       <article class="panel reveal">
-        <p class="kicker">Education</p>
+        <p class="mini">Education</p>
         <h3 class="panel-title">{EDUCATION['school']}</h3>
         <p class="panel-sub">{EDUCATION['degree']} &nbsp;&middot;&nbsp; {EDUCATION['minor']}</p>
         <dl class="mini-stats">
@@ -315,7 +298,7 @@ def about(n):
         </details>
       </article>
       <article class="panel reveal">
-        <p class="kicker">Toolbox</p>
+        <p class="mini">Tools &amp; skills</p>
         {skills}
       </article>
     </div>
@@ -325,17 +308,18 @@ def about(n):
 
 
 def contact(n):
-    return f"""<section class="contact" id="contact" aria-labelledby="contact-h">
-  <div class="contact-livery" aria-hidden="true"><span></span><span></span></div>
-  <div class="wrap contact-inner">
-    <p class="kicker">{num(n)} &nbsp;/&nbsp; Contact</p>
-    <h2 id="contact-h" class="contact-title">Let&rsquo;s build something fast.</h2>
-    <p class="contact-sub">{SITE['availability']} for summer internships. Email is the quickest way to reach me.</p>
-    <div class="contact-actions">
-      <a class="btn btn-ink" href="mailto:{SITE['email']}">{ICONS['mail']} Email me</a>
-      <button class="btn btn-ink-ghost" type="button" data-copy="{SITE['email']}">{ICONS['copy']} <span class="as-text" data-copy-label>{SITE['email']}</span></button>
-      <a class="btn btn-ink-ghost" href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']} LinkedIn</a>
-      <a class="btn btn-ink-ghost" href="resume.html">{ICONS['doc']} R&eacute;sum&eacute;</a>
+    return f"""<section class="section contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="contact-inner reveal">
+      <p class="kicker"><span class="sec-num">{num(n)}</span>Contact</p>
+      <h2 id="contact-h" class="contact-title">Let&rsquo;s build something <span class="hl">fast.</span></h2>
+      <p class="contact-sub">{SITE['availability']} for summer internships. Email is the quickest way to reach me.</p>
+      <a class="big-mail" href="mailto:{SITE['email']}">{SITE['email']} {ICONS['arrow-ne']}</a>
+      <div class="contact-actions">
+        <button class="btn btn-outline" type="button" data-copy="{SITE['email']}">{ICONS['copy']} <span data-copy-label>Copy email</span></button>
+        <a class="btn btn-outline" href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']} LinkedIn</a>
+        <a class="btn btn-outline" href="resume.html">{ICONS['doc']} R&eacute;sum&eacute;</a>
+      </div>
     </div>
   </div>
 </section>"""
@@ -345,7 +329,6 @@ def build_index():
     n_cats = len(CATEGORIES)
     body = "\n".join([
         hero(),
-        ticker(),
         work_sections(),
         experience(n_cats + 1),
         about(n_cats + 2),
@@ -410,31 +393,25 @@ def project_page(p, index, prev_p, next_p):
 
     body = f"""<article class="project">
   <header class="p-hero">
-    <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="wrap">
       <a class="back" href="../#work">{ICONS['back']} All work</a>
-      <div class="p-hero-grid">
-        <div>
-          <p class="kicker">{cat} &nbsp;/&nbsp; Project {n}</p>
-          <h1 class="p-title">{p['title']}</h1>
-          <p class="p-lede">{p['lede']}</p>
-          <ul class="chips chips-tags">{tags}</ul>
-        </div>
-        <span class="p-num" aria-hidden="true">{n}</span>
-      </div>
-      <dl class="telemetry">
+      <p class="kicker"><span class="sec-num">{n}</span>{cat}</p>
+      <h1 class="p-title">{p['title']}</h1>
+      <p class="p-lede">{p['lede']}</p>
+      <ul class="chips chips-tags">{tags}</ul>
+      <dl class="facts">
 {specs}
       </dl>
     </div>
   </header>
   <figure class="wrap p-art reveal">
     <div class="p-art-frame">{art(p['art'], 'page', label=f"Schematic illustration for {strip_tags(p['title'])}")}</div>
-    <figcaption>Fig. {n} &nbsp;/&nbsp; Schematic illustration, not to scale</figcaption>
+    <figcaption>Fig. {n} &nbsp;&middot;&nbsp; Schematic illustration, not to scale</figcaption>
   </figure>
   {stats}
   <div class="wrap p-body">
     <aside class="p-aside reveal">
-      <p class="kicker">Tools &amp; skills</p>
+      <p class="mini">Tools &amp; skills</p>
       <ul class="chips">{tools}</ul>
     </aside>
     <div class="p-content">
@@ -444,7 +421,7 @@ def project_page(p, index, prev_p, next_p):
   </div>
   <nav class="wrap p-nav" aria-label="More projects">
     {pn(prev_p, 'prev', '&larr; Previous')}
-    {pn(next_p, 'next', 'Next up &rarr;')}
+    {pn(next_p, 'next', 'Next &rarr;')}
   </nav>
 </article>"""
     return page(
@@ -464,15 +441,14 @@ def project_page(p, index, prev_p, next_p):
 def build_resume():
     pdf = SITE["resume_pdf"]
     body = f"""<section class="page-head">
-  <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap">
     <a class="back" href="./">{ICONS['back']} Home</a>
-    <p class="kicker">R&eacute;sum&eacute; &nbsp;/&nbsp; PDF</p>
+    <p class="kicker">R&eacute;sum&eacute;</p>
     <h1 class="page-title">{SITE['name']}</h1>
     <p class="p-lede">{EDUCATION['degree']}, {EDUCATION['school']} &nbsp;&middot;&nbsp; {SITE['availability']}</p>
     <div class="actions">
-      <a class="btn btn-red" href="{pdf}" download>{ICONS['download']} Download PDF</a>
-      <a class="btn btn-ghost" href="{pdf}" target="_blank" rel="noopener">{ICONS['external']} Open in new tab</a>
+      <a class="btn btn-solid" href="{pdf}" download>{ICONS['download']} Download PDF</a>
+      <a class="btn btn-outline" href="{pdf}" target="_blank" rel="noopener">{ICONS['arrow-ne']} Open in new tab</a>
     </div>
   </div>
 </section>
@@ -485,8 +461,8 @@ def build_resume():
       {ICONS['doc']}
       <p><strong>{SITE['name']} &mdash; R&eacute;sum&eacute;</strong><br>One page, PDF.</p>
       <div class="actions">
-        <a class="btn btn-red" href="{pdf}" target="_blank" rel="noopener">{ICONS['external']} Open PDF</a>
-        <a class="btn btn-ghost" href="{pdf}" download>{ICONS['download']} Download</a>
+        <a class="btn btn-solid" href="{pdf}" target="_blank" rel="noopener">{ICONS['arrow-ne']} Open PDF</a>
+        <a class="btn btn-outline" href="{pdf}" download>{ICONS['download']} Download</a>
       </div>
     </div>
   </div>
@@ -503,12 +479,11 @@ def build_resume():
 
 def build_404():
     body = f"""<section class="page-head dnf">
-  <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap">
     <p class="kicker">Error 404</p>
-    <h1 class="dnf-title">DNF</h1>
-    <p class="p-lede">This page didn&rsquo;t finish the race. It may have moved, or it never left the garage.</p>
-    <div class="actions"><a class="btn btn-red" href="/">{ICONS['back']} Back to the pits</a></div>
+    <h1 class="dnf-title">Page not found</h1>
+    <p class="p-lede">This page may have moved, or it never left the garage.</p>
+    <div class="actions"><a class="btn btn-solid" href="/">{ICONS['back']} Back to home</a></div>
   </div>
 </section>"""
     return page(

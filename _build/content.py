@@ -32,11 +32,11 @@ SITE = {
     "class_year": "28",
 }
 
-# Four readouts under the hero, styled like race telemetry.
-TELEMETRY = [
-    ("Role", "Cooling Sub-team Lead"),
-    ("Team", "Cornell Racing FSAE"),
-    ("Best gain", "&minus;1.0&nbsp;kg battery container"),
+# Four short facts in a row under the hero.
+FACTS = [
+    ("Currently", "Cooling Sub-team Lead, Cornell Racing FSAE"),
+    ("Studying", "B.S. Mechanical Engineering, Cornell &rsquo;28"),
+    ("Based in", "Ithaca, NY"),
     ("Status", "Available May&ndash;Aug 2027"),
 ]
 

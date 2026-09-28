@@ -6,7 +6,7 @@
 <title>James Kurtis &mdash; Mechanical Engineer</title>
 <meta name="description" content="James Kurtis is a Mechanical Engineering student at Cornell University and Cooling Sub-team Lead for Cornell Racing FSAE, designing cooling, battery, and high-voltage systems for an electric race car.">
 <meta name="author" content="James Kurtis">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#fafaf8">
 <link rel="canonical" href="https://jjk349.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="James Kurtis">
@@ -20,7 +20,7 @@
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.add("js")</script>
 <script src="assets/js/main.js" defer></script>
@@ -31,7 +31,7 @@
 <header class="nav" data-nav>
   <div class="wrap nav-inner">
     <a class="brand" href="./" aria-label="James Kurtis, home">
-      <span class="brand-mark">JK</span><span class="brand-name">James Kurtis</span>
+      <span class="brand-mark" aria-hidden="true"></span>James Kurtis
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
       <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
@@ -41,61 +41,52 @@
       <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <a class="btn btn-sm btn-red" href="resume.html">R&eacute;sum&eacute;</a>
+      <a class="btn btn-sm btn-outline" href="resume.html">R&eacute;sum&eacute;</a>
     </nav>
   </div>
 </header>
 <main id="main">
 <section class="hero" aria-labelledby="hero-name">
-  <div class="hero-livery" aria-hidden="true"><span></span><span></span><span></span></div>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Mechanical Engineering @ Cornell</p>
-      <h1 id="hero-name" class="hero-name"><span class="l1">James</span><span class="l2">Kurtis</span></h1>
-      <p class="hero-lede">Cooling Sub-team Lead at Cornell Racing FSAE. I design, build, and test the systems that keep an electric race car cool, light, and safe.</p>
-      <div class="hero-cta">
-        <a class="btn btn-red" href="#work">See the work <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="assets/resume/James-Kurtis-Resume.pdf" download>R&eacute;sum&eacute; <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
-      </div>
-      <ul class="socials" aria-label="Contact links">
-        <li><a href="mailto:jjk349@cornell.edu"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg><span>jjk349@cornell.edu</span></a></li>
-        <li><a href="https://www.linkedin.com/in/James-Kurtis" target="_blank" rel="noopener"><svg class="i i-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-1.8 3.44-1.8 3.68 0 4.2 2.2 4.2 5.06v6.24h-4v-5.5c0-1.32-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.9v5.6h-4v-11Z"/></svg><span>LinkedIn</span></a></li>
-      </ul>
-    </div>
-    <figure class="hero-photo">
-      <div class="photo-frame">
-        <img src="assets/img/profile.jpg" alt="Portrait of James Kurtis" width="693" height="1145" fetchpriority="high">
-      </div>
-      <div class="plate" aria-hidden="true"><span class="plate-num">28</span><span class="plate-lbl">Cornell</span></div>
-      <figcaption>Ithaca, NY &nbsp;/&nbsp; Class of 2028</figcaption>
-    </figure>
-  </div>
   <div class="wrap">
-    <dl class="telemetry">
-      <div><dt>Role</dt><dd>Cooling Sub-team Lead</dd></div>
-      <div><dt>Team</dt><dd>Cornell Racing FSAE</dd></div>
-      <div><dt>Best gain</dt><dd>&minus;1.0&nbsp;kg battery container</dd></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Mechanical Engineering @ Cornell</p>
+        <h1 id="hero-name" class="hero-name"><span class="line"><span>James</span></span><span class="line"><span>Kurtis</span></span></h1>
+        <p class="hero-lede">Cooling Sub-team Lead at Cornell Racing FSAE. I design, build, and test the systems that keep an electric race car cool, light, and safe.</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="#work">See the work <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-outline" href="assets/resume/James-Kurtis-Resume.pdf" download>Download r&eacute;sum&eacute; <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></a>
+        </div>
+        <ul class="socials" aria-label="Contact links">
+          <li><a href="mailto:jjk349@cornell.edu"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg><span>jjk349@cornell.edu</span></a></li>
+          <li><a href="https://www.linkedin.com/in/James-Kurtis" target="_blank" rel="noopener"><svg class="i i-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-1.8 3.44-1.8 3.68 0 4.2 2.2 4.2 5.06v6.24h-4v-5.5c0-1.32-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.9v5.6h-4v-11Z"/></svg><span>LinkedIn</span></a></li>
+        </ul>
+      </div>
+      <figure class="hero-photo">
+        <div class="photo-frame"><img src="assets/img/profile.jpg" alt="Portrait of James Kurtis" width="693" height="1145" fetchpriority="high"></div>
+      </figure>
+    </div>
+    <dl class="facts">
+      <div><dt>Currently</dt><dd>Cooling Sub-team Lead, Cornell Racing FSAE</dd></div>
+      <div><dt>Studying</dt><dd>B.S. Mechanical Engineering, Cornell &rsquo;28</dd></div>
+      <div><dt>Based in</dt><dd>Ithaca, NY</dd></div>
       <div><dt>Status</dt><dd>Available May&ndash;Aug 2027</dd></div>
     </dl>
   </div>
 </section>
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track"><span class="ticker-item">Cooling System Architecture</span><span class="ticker-item">Tractive Battery Container</span><span class="ticker-item">Center of Gravity Height Test</span><span class="ticker-item">Low Voltage Box</span><span class="ticker-item">Fireproof Composite Testing</span><span class="ticker-item">DCIR Cell Testing</span><span class="ticker-item">Bike Frame Design</span><span class="ticker-item">Cornell Racing</span><span class="ticker-item">Cooling System Architecture</span><span class="ticker-item">Tractive Battery Container</span><span class="ticker-item">Center of Gravity Height Test</span><span class="ticker-item">Low Voltage Box</span><span class="ticker-item">Fireproof Composite Testing</span><span class="ticker-item">DCIR Cell Testing</span><span class="ticker-item">Bike Frame Design</span><span class="ticker-item">Cornell Racing</span></div>
-</div>
 <div id="work">
 <section class="section" id="fsae" aria-labelledby="fsae-h">
   <div class="wrap">
   <header class="sec-head reveal">
-    <span class="sec-num" aria-hidden="true">01</span>
     <div class="sec-titles">
-      <p class="kicker">Category 01 &nbsp;/&nbsp; 6 projects</p>
+      <p class="kicker"><span class="sec-num">01</span>6 projects</p>
       <h2 id="fsae-h" class="sec-title">Cornell FSAE Racing</h2>
     </div>
     <p class="sec-intro">Cornell Racing designs, builds, and races an electric Formula SAE car. These are the systems I&rsquo;ve worked on across cooling, the high-voltage battery, and vehicle testing.</p>
   </header>
   <div class="grid">
 <a class="card reveal" style="--i:0" href="projects/cooling-system-architecture.html">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <g class="ln">
     <rect x="40" y="60" width="72" height="170" rx="3"/>
     <circle cx="190" cy="232" r="22"/>
@@ -139,14 +130,14 @@
   <text class="lbl" x="248" y="38">COLD</text>
 </svg></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">01</span><span class="card-tags">Thermal / Systems / Leadership</span></div>
+    <p class="card-meta"><span class="card-num">01</span><span>Thermal &middot; Systems &middot; Leadership</span></p>
     <h3 class="card-title">Cooling System Architecture</h3>
     <p class="card-sum">Leading the design of the car&rsquo;s full liquid cooling loop, sized with a MATLAB flow model and checked against sensor data from the previous car.</p>
     <div class="card-foot"><span class="readout">5-person sub-team</span><span class="card-go">Read <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
   </div>
 </a>
 <a class="card reveal" style="--i:1" href="projects/tractive-battery-container.html">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <g class="ln">
     <path class="solid" d="M100 130 L180 80 H380 L300 130 Z"/>
     <path class="solid" d="M300 130 L380 80 V190 L300 240 Z"/>
@@ -168,14 +159,14 @@
   <path class="faint" d="M100 58 H200"/>
 </svg></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">02</span><span class="card-tags">Structures / Composites / Manufacturing</span></div>
+    <p class="card-meta"><span class="card-num">02</span><span>Structures &middot; Composites &middot; Manufacturing</span></p>
     <h3 class="card-title">Tractive Battery Container</h3>
     <p class="card-sum">Redesigned and manufactured the container that holds the car&rsquo;s high-voltage battery, cutting 1&nbsp;kg (10%) from the previous design.</p>
     <div class="card-foot"><span class="readout">&minus;1.0 kg &nbsp;/&nbsp; &minus;10%</span><span class="card-go">Read <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
   </div>
 </a>
 <article class="card is-stub reveal" style="--i:2">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <path class="ln" d="M20 262 H460"/>
   <rect class="ln solid" x="335" y="250" width="70" height="12"/>
   <rect class="ln solid" x="100" y="221" width="64" height="41"/>
@@ -204,16 +195,16 @@
   <text class="lbl" x="132" y="284" text-anchor="middle">LIFT</text>
   <text class="lbl" x="20" y="40">CG HEIGHT / TILT</text>
   <path class="faint" d="M20 46 H150"/>
-</svg><span class="pitboard">In the garage</span></div>
+</svg><span class="soon"><span class="dot" aria-hidden="true"></span>In progress</span></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">03</span><span class="card-tags">Vehicle Dynamics / Testing</span></div>
+    <p class="card-meta"><span class="card-num">03</span><span>Vehicle Dynamics &middot; Testing</span></p>
     <h3 class="card-title">Center of Gravity Height Test</h3>
     <p class="card-sum">Finding how high the car&rsquo;s center of gravity sits.</p>
     <div class="card-foot"><span class="readout muted">Write-up coming soon</span></div>
   </div>
 </article>
 <a class="card reveal" style="--i:0" href="projects/low-voltage-box.html">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <path class="dim" d="M110 150 V98 M330 150 V98 M390 115 V63"/>
   <g class="ln">
     <path class="solid" d="M110 90 L170 55 H390 L330 90 Z"/>
@@ -243,14 +234,14 @@
   <text class="lbl" x="400" y="84">LID</text>
 </svg></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">04</span><span class="card-tags">Packaging / Prototyping</span></div>
+    <p class="card-meta"><span class="card-num">04</span><span>Packaging &middot; Prototyping</span></p>
     <h3 class="card-title">Low Voltage Box</h3>
     <p class="card-sum">Designed the ARG25 low-voltage enclosure in CAD and proved out its fit with 3D-printed prototypes before building it for the car.</p>
     <div class="card-foot"><span class="readout">CAD &rarr; print &rarr; car</span><span class="card-go">Read <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
   </div>
 </a>
 <article class="card is-stub reveal" style="--i:1">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <clipPath id="composite-card5-ply0"><path d="M110 200 H350 L410 164 H170 Z"/></clipPath>
     <clipPath id="composite-card5-ply1"><path d="M110 172 H350 L410 136 H170 Z"/></clipPath>
@@ -278,16 +269,16 @@
   <text class="lbl badge-t" x="446" y="60" text-anchor="middle">T</text>
   <text class="lbl" x="40" y="40">LAYUP / FLAME</text>
   <path class="faint" d="M40 46 H150"/>
-</svg><span class="pitboard">In the garage</span></div>
+</svg><span class="soon"><span class="dot" aria-hidden="true"></span>In progress</span></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">05</span><span class="card-tags">Materials / Testing</span></div>
+    <p class="card-meta"><span class="card-num">05</span><span>Materials &middot; Testing</span></p>
     <h3 class="card-title">Fireproof Composite Testing</h3>
     <p class="card-sum">Evaluating the fire resistance of composite materials.</p>
     <div class="card-foot"><span class="readout muted">Write-up coming soon</span></div>
   </div>
 </article>
 <a class="card reveal" style="--i:2" href="projects/dcir-cell-testing.html">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <path class="faint" d="M70 170 H454 M70 210 H454 M170 36 V250 M270 36 V250 M370 36 V250"/>
   <g class="ln">
     <path d="M70 36 V250 H454"/>
@@ -310,7 +301,7 @@
   <text class="lbl" x="416" y="56" text-anchor="middle">LiPo</text>
 </svg></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">06</span><span class="card-tags">Batteries / Testing</span></div>
+    <p class="card-meta"><span class="card-num">06</span><span>Batteries &middot; Testing</span></p>
     <h3 class="card-title">DCIR Cell Testing</h3>
     <p class="card-sum">Measured the internal resistance of lithium-polymer pouch cells to quantify their heat generation and validate the pack, cooling, and BMS design.</p>
     <div class="card-foot"><span class="readout">R = &Delta;V / &Delta;I</span><span class="card-go">Read <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
@@ -322,16 +313,15 @@
 <section class="section" id="other" aria-labelledby="other-h">
   <div class="wrap">
   <header class="sec-head reveal">
-    <span class="sec-num" aria-hidden="true">02</span>
     <div class="sec-titles">
-      <p class="kicker">Category 02 &nbsp;/&nbsp; 1 project</p>
+      <p class="kicker"><span class="sec-num">02</span>1 project</p>
       <h2 id="other-h" class="sec-title">Other Projects</h2>
     </div>
     <p class="sec-intro">Engineering work outside the race team.</p>
   </header>
   <div class="grid grid-solo">
 <article class="card is-stub reveal" style="--i:0">
-  <div class="card-art"><svg class="art-svg" aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <div class="card-art"><svg class="art-svg" data-draw aria-hidden="true" focusable="false" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
   <path class="faint" d="M30 258 H450"/>
   <circle class="faint" cx="118" cy="196" r="54"/>
   <circle class="faint" cx="362" cy="196" r="54"/>
@@ -364,9 +354,9 @@
   <text class="lbl" x="240" y="275" text-anchor="middle">WHEELBASE</text>
   <text class="lbl" x="30" y="40">FRAME GEOMETRY</text>
   <path class="faint" d="M30 46 H150"/>
-</svg><span class="pitboard">In the garage</span></div>
+</svg><span class="soon"><span class="dot" aria-hidden="true"></span>In progress</span></div>
   <div class="card-body">
-    <div class="card-meta"><span class="card-num">07</span><span class="card-tags">Design / Structures</span></div>
+    <p class="card-meta"><span class="card-num">07</span><span>Design &middot; Structures</span></p>
     <h3 class="card-title">Bike Frame Design</h3>
     <p class="card-sum">Frame geometry and structural design for a bicycle.</p>
     <div class="card-foot"><span class="readout muted">Write-up coming soon</span></div>
@@ -379,83 +369,75 @@
 <section class="section" id="experience" aria-labelledby="exp-h">
   <div class="wrap">
   <header class="sec-head reveal">
-    <span class="sec-num" aria-hidden="true">03</span>
     <div class="sec-titles">
-      <p class="kicker">Timing tower &nbsp;/&nbsp; Tap a row for details</p>
+      <p class="kicker"><span class="sec-num">03</span>Click a role for details</p>
       <h2 id="exp-h" class="sec-title">Experience</h2>
     </div>
   </header>
-  <div class="tower reveal">
-    <div class="tower-head" aria-hidden="true"><span>Pos</span><span>Team</span><span>Role</span><span>Interval</span><span></span></div>
-    <details class="tower-row" open>
+  <div class="exp reveal">
+    <div class="exp-group"><details class="acc" open>
   <summary>
-    <span class="pos">P1</span>
     <span class="org">Cornell Racing FSAE</span>
     <span class="role">Cooling Sub-team Lead</span>
     <span class="dates">Oct 2024 &ndash; Present</span>
     <span class="toggle" aria-hidden="true"></span>
   </summary>
-  <div class="tower-detail"><p class="tower-place">Ithaca, NY</p><ul><li>Lead a 5-person cooling sub-team, hosting weekly design meetings, delegating tasks, and coordinating integration with other sub-teams to develop full-car cooling infrastructure.</li><li>Built a MATLAB model of the liquid cooling loop to predict required flow rates and component pressure drops, giving part designers mass-optimized design targets.</li><li>Fitted the previous cooling system with temperature and flow-rate sensors to validate the team&rsquo;s design method against endurance data.</li><li>Redesigned and manufactured the tractive battery container, saving 1&nbsp;kg (10%) through iterative modeling in Autodesk Inventor.</li><li>Created GD&amp;T-compliant drawings for battery mounting hardware and machined clevises, bushings, and aluminum parts on a mill and lathe.</li><li>Performed internal resistance testing on lithium-polymer pouch cells to quantify heat generation, validating pack architecture, cooling, and BMS configuration.</li></ul></div>
-</details><details class="tower-row">
+  <div class="acc-body"><p class="acc-place">Ithaca, NY</p><ul><li>Lead a 5-person cooling sub-team, hosting weekly design meetings, delegating tasks, and coordinating integration with other sub-teams to develop full-car cooling infrastructure.</li><li>Built a MATLAB model of the liquid cooling loop to predict required flow rates and component pressure drops, giving part designers mass-optimized design targets.</li><li>Fitted the previous cooling system with temperature and flow-rate sensors to validate the team&rsquo;s design method against endurance data.</li><li>Redesigned and manufactured the tractive battery container, saving 1&nbsp;kg (10%) through iterative modeling in Autodesk Inventor.</li><li>Created GD&amp;T-compliant drawings for battery mounting hardware and machined clevises, bushings, and aluminum parts on a mill and lathe.</li><li>Performed internal resistance testing on lithium-polymer pouch cells to quantify heat generation, validating pack architecture, cooling, and BMS configuration.</li></ul></div>
+</details><details class="acc">
   <summary>
-    <span class="pos">P2</span>
     <span class="org">Ametek Hughes-Treitler</span>
     <span class="role">Materials Management Intern</span>
     <span class="dates">Jun &ndash; Aug 2026</span>
     <span class="toggle" aria-hidden="true"></span>
   </summary>
-  <div class="tower-detail"><p class="tower-place">Garden City, NY</p><ul><li>Manufactured Inconel foil (laser cutting, stamping, cleaning) and assembled stacked-foil cores for 5 iterations of experimental micro-foil heat exchangers for performance and pressure testing.</li><li>Reverse-engineered performance specifications (flow rate, pressure drop, heat rejection) from 20+ competitor direct-to-chip GPU cold plates, informing cold plate redesigns and next-gen targets.</li><li>Built 6 Power BI and Excel tools consolidating sales, demand, and inventory data, aligning planning, purchasing, and manufacturing while saving planners about 3 hours per week.</li></ul></div>
-</details><details class="tower-row">
+  <div class="acc-body"><p class="acc-place">Garden City, NY</p><ul><li>Manufactured Inconel foil (laser cutting, stamping, cleaning) and assembled stacked-foil cores for 5 iterations of experimental micro-foil heat exchangers for performance and pressure testing.</li><li>Reverse-engineered performance specifications (flow rate, pressure drop, heat rejection) from 20+ competitor direct-to-chip GPU cold plates, informing cold plate redesigns and next-gen targets.</li><li>Built 6 Power BI and Excel tools consolidating sales, demand, and inventory data, aligning planning, purchasing, and manufacturing while saving planners about 3 hours per week.</li></ul></div>
+</details><details class="acc">
   <summary>
-    <span class="pos">P3</span>
     <span class="org">Aesthetic Wrks</span>
     <span class="role">Car Detailing Apprentice</span>
     <span class="dates">Jun &ndash; Aug 2025</span>
     <span class="toggle" aria-hidden="true"></span>
   </summary>
-  <div class="tower-detail"><p class="tower-place">Hempstead, NY</p><ul><li>Shadowed technicians during automotive maintenance including oil changes, spark plug replacement, and basic diagnostics.</li><li>Installed vinyl wraps and paint protection film and performed minor bodywork on high-performance and luxury vehicles.</li></ul></div>
-</details>
-    <div class="tower-divider">Leadership</div>
-    <details class="tower-row">
+  <div class="acc-body"><p class="acc-place">Hempstead, NY</p><ul><li>Shadowed technicians during automotive maintenance including oil changes, spark plug replacement, and basic diagnostics.</li><li>Installed vinyl wraps and paint protection film and performed minor bodywork on high-performance and luxury vehicles.</li></ul></div>
+</details></div>
+    <p class="exp-label">Leadership</p>
+    <div class="exp-group"><details class="acc">
   <summary>
-    <span class="pos">P4</span>
     <span class="org">Varsity Wrestling, Xavier High School</span>
     <span class="role">Team Captain</span>
     <span class="dates">Nov 2022 &ndash; Feb 2024</span>
     <span class="toggle" aria-hidden="true"></span>
   </summary>
-  <div class="tower-detail"><ul><li>Elected by teammates to lead and instruct a 60-person team.</li><li>Qualified for the CHSAA State Championship.</li></ul></div>
-</details><details class="tower-row">
+  <div class="acc-body"><ul><li>Elected by teammates to lead and instruct a 60-person team.</li><li>Qualified for the CHSAA State Championship.</li></ul></div>
+</details><details class="acc">
   <summary>
-    <span class="pos">P5</span>
     <span class="org">Valor Mixed Martial Arts</span>
     <span class="role">First Degree Black Belt</span>
     <span class="dates">2012 &ndash; Present</span>
     <span class="toggle" aria-hidden="true"></span>
   </summary>
-  <div class="tower-detail"><ul><li>Earned a 1st degree black belt in Kaju Bujutsu Kwai over 13 years of training.</li><li>Mentored junior students and served on the leadership team.</li></ul></div>
-</details>
+  <div class="acc-body"><ul><li>Earned a 1st degree black belt in Kaju Bujutsu Kwai over 13 years of training.</li><li>Mentored junior students and served on the leadership team.</li></ul></div>
+</details></div>
   </div>
   </div>
 </section>
 <section class="section" id="about" aria-labelledby="about-h">
   <div class="wrap">
   <header class="sec-head reveal">
-    <span class="sec-num" aria-hidden="true">04</span>
     <div class="sec-titles">
-      <p class="kicker">Driver profile</p>
+      <p class="kicker"><span class="sec-num">04</span>Background</p>
       <h2 id="about-h" class="sec-title">About</h2>
     </div>
   </header>
   <div class="about-grid">
     <div class="about-copy reveal">
       <p class="about-lead">I&rsquo;m a Mechanical Engineering student at Cornell University, minoring in Business for Engineers. On Cornell Racing FSAE I lead the cooling sub-team, and my work on the team spans the car&rsquo;s cooling system, its high-voltage accumulator, and battery cell testing.</p><p class="">Working hands-on where mechanical and electrical engineering meet has given me a particular interest in electric vehicles, and in the thermal and battery systems that make them work.</p>
-      <h3 class="mini">Off track</h3>
-      <ul class="chips chips-soft"><li>Formula One</li><li>Electric Vehicles</li><li>Mixed Martial Arts</li><li>Karting</li><li>Scuba Diving (PADI Advanced Open Water)</li><li>Guitar</li></ul>
+      <h3 class="mini">Outside of engineering</h3>
+      <ul class="chips"><li>Formula One</li><li>Electric Vehicles</li><li>Mixed Martial Arts</li><li>Karting</li><li>Scuba Diving (PADI Advanced Open Water)</li><li>Guitar</li></ul>
     </div>
     <div class="about-side">
       <article class="panel reveal">
-        <p class="kicker">Education</p>
+        <p class="mini">Education</p>
         <h3 class="panel-title">Cornell University</h3>
         <p class="panel-sub">B.S. Mechanical Engineering &nbsp;&middot;&nbsp; Business Minor for Engineers</p>
         <dl class="mini-stats">
@@ -468,30 +450,30 @@
         </details>
       </article>
       <article class="panel reveal">
-        <p class="kicker">Toolbox</p>
+        <p class="mini">Tools &amp; skills</p>
         <div class="skill-group"><h4>CAD / Simulation</h4><ul class="chips"><li>ANSYS</li><li>Autodesk Inventor</li><li>Fusion 360</li><li>Rhino 7</li></ul></div><div class="skill-group"><h4>Manufacturing</h4><ul class="chips"><li>Mill</li><li>Lathe</li><li>Laser Welding (Lightweld 2000XR)</li><li>3D Printing</li><li>Soldering</li><li>GD&amp;T Drawings</li></ul></div><div class="skill-group"><h4>Programming &amp; Tools</h4><ul class="chips"><li>Python</li><li>MATLAB</li><li>Excel</li><li>Power BI</li><li>Power Automate</li></ul></div>
       </article>
     </div>
   </div>
   </div>
 </section>
-<section class="contact" id="contact" aria-labelledby="contact-h">
-  <div class="contact-livery" aria-hidden="true"><span></span><span></span></div>
-  <div class="wrap contact-inner">
-    <p class="kicker">05 &nbsp;/&nbsp; Contact</p>
-    <h2 id="contact-h" class="contact-title">Let&rsquo;s build something fast.</h2>
-    <p class="contact-sub">Available May&ndash;Aug 2027 for summer internships. Email is the quickest way to reach me.</p>
-    <div class="contact-actions">
-      <a class="btn btn-ink" href="mailto:jjk349@cornell.edu"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg> Email me</a>
-      <button class="btn btn-ink-ghost" type="button" data-copy="jjk349@cornell.edu"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></svg> <span class="as-text" data-copy-label>jjk349@cornell.edu</span></button>
-      <a class="btn btn-ink-ghost" href="https://www.linkedin.com/in/James-Kurtis" target="_blank" rel="noopener"><svg class="i i-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-1.8 3.44-1.8 3.68 0 4.2 2.2 4.2 5.06v6.24h-4v-5.5c0-1.32-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.9v5.6h-4v-11Z"/></svg> LinkedIn</a>
-      <a class="btn btn-ink-ghost" href="resume.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg> R&eacute;sum&eacute;</a>
+<section class="section contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="contact-inner reveal">
+      <p class="kicker"><span class="sec-num">05</span>Contact</p>
+      <h2 id="contact-h" class="contact-title">Let&rsquo;s build something <span class="hl">fast.</span></h2>
+      <p class="contact-sub">Available May&ndash;Aug 2027 for summer internships. Email is the quickest way to reach me.</p>
+      <a class="big-mail" href="mailto:jjk349@cornell.edu">jjk349@cornell.edu <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <div class="contact-actions">
+        <button class="btn btn-outline" type="button" data-copy="jjk349@cornell.edu"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></svg> <span data-copy-label>Copy email</span></button>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/James-Kurtis" target="_blank" rel="noopener"><svg class="i i-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-1.8 3.44-1.8 3.68 0 4.2 2.2 4.2 5.06v6.24h-4v-5.5c0-1.32-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.9v5.6h-4v-11Z"/></svg> LinkedIn</a>
+        <a class="btn btn-outline" href="resume.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7l-4-4Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg> R&eacute;sum&eacute;</a>
+      </div>
     </div>
   </div>
 </section>
 </main>
 <footer class="footer">
-  <div class="checker" aria-hidden="true"></div>
   <div class="wrap footer-inner">
     <span>&copy; <span data-year>2026</span> James Kurtis</span>
     <span class="footer-links">
