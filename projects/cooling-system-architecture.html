@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cooling System Architecture &mdash; James Kurtis</title>
+<meta name="description" content="Leading the design of the car&rsquo;s full liquid cooling loop, sized with a MATLAB flow model and checked against sensor data from the previous car.">
+<meta name="author" content="James Kurtis">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="canonical" href="https://jjk349.github.io/projects/cooling-system-architecture.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="James Kurtis">
+<meta property="og:title" content="Cooling System Architecture &mdash; James Kurtis">
+<meta property="og:description" content="Leading the design of the car&rsquo;s full liquid cooling loop, sized with a MATLAB flow model and checked against sensor data from the previous car.">
+<meta property="og:url" content="https://jjk349.github.io/projects/cooling-system-architecture.html">
+<meta property="og:image" content="https://jjk349.github.io/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>document.documentElement.classList.add("js")</script>
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body class="project-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="nav" data-nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="../" aria-label="James Kurtis, home">
+      <span class="brand-mark">JK</span><span class="brand-name">James Kurtis</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+      <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
+    </button>
+    <nav id="nav-menu" class="nav-menu" aria-label="Primary">
+      <a href="../#work">Work</a>
+      <a href="../#experience">Experience</a>
+      <a href="../#about">About</a>
+      <a href="../#contact">Contact</a>
+      <a class="btn btn-sm btn-red" href="../resume.html">R&eacute;sum&eacute;</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<article class="project">
+  <header class="p-hero">
+    <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="wrap">
+      <a class="back" href="../#work"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg> All work</a>
+      <div class="p-hero-grid">
+        <div>
+          <p class="kicker">Cornell FSAE Racing &nbsp;/&nbsp; Project 01</p>
+          <h1 class="p-title">Cooling System Architecture</h1>
+          <p class="p-lede">As cooling sub-team lead, I&rsquo;m responsible for the architecture of the liquid cooling loop on Cornell Racing&rsquo;s electric race car, and for making sure every part of it earns its weight.</p>
+          <ul class="chips chips-tags"><li>Thermal</li><li>Systems</li><li>Leadership</li></ul>
+        </div>
+        <span class="p-num" aria-hidden="true">01</span>
+      </div>
+      <dl class="telemetry">
+      <div><dt>Role</dt><dd>Cooling Sub-team Lead</dd></div>
+      <div><dt>Team</dt><dd>5-person sub-team</dd></div>
+      <div><dt>Tools</dt><dd>MATLAB, flow &amp; temperature sensors</dd></div>
+      <div><dt>Status</dt><dd>Ongoing</dd></div>
+      </dl>
+    </div>
+  </header>
+  <figure class="wrap p-art reveal">
+    <div class="p-art-frame"><svg class="art-svg" role="img" aria-label="Schematic illustration for Cooling System Architecture" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <g class="ln">
+    <rect x="40" y="60" width="72" height="170" rx="3"/>
+    <circle cx="190" cy="232" r="22"/>
+    <path d="M181 221 L204 232 L181 243 Z"/>
+    <rect x="276" y="204" width="84" height="56" rx="3"/>
+    <circle cx="390" cy="96" r="42"/>
+    <circle cx="390" cy="96" r="16"/>
+    <path d="M432 96h26"/>
+    <path d="M112 212 H150 V232 H168"/>
+    <path d="M212 232 H276"/>
+    <path d="M224 226 l8 6 l-8 6"/>
+    <path d="M144 218 l6 8 l6 -8"/>
+  </g>
+  <path class="faint" d="M50 76h52M50 88h52M50 100h52M50 112h52M50 124h52M50 136h52M50 148h52M50 160h52M50 172h52M50 184h52M50 196h52M50 208h52M50 220h52"/>
+  <path class="faint" d="M288 218h60M288 230h60M288 242h36"/>
+  <g class="ac">
+    <path d="M318 204 V170 H390 V138"/>
+    <path d="M348 96 H250 V78 H112"/>
+    <path d="M312 190 l6 -8 l6 8"/>
+    <path d="M190 72 l-8 6 l8 6"/>
+  </g>
+  <g class="flow">
+    <path d="M112 212 H150 V232 H168"/>
+    <path d="M212 232 H276"/>
+    <path class="hot" d="M318 204 V170 H390 V138"/>
+    <path class="hot" d="M348 96 H250 V78 H112"/>
+  </g>
+  <circle class="badge" cx="131" cy="212" r="9"/>
+  <text class="lbl badge-t" x="131" y="216" text-anchor="middle">T</text>
+  <circle class="badge" cx="254" cy="232" r="9"/>
+  <text class="lbl badge-t" x="254" y="236" text-anchor="middle">Q</text>
+  <circle class="badge" cx="300" cy="96" r="9"/>
+  <text class="lbl badge-t" x="300" y="100" text-anchor="middle">T</text>
+  <text class="lbl" x="76" y="252" text-anchor="middle">RADIATOR</text>
+  <text class="lbl" x="190" y="276" text-anchor="middle">PUMP</text>
+  <text class="lbl" x="318" y="280" text-anchor="middle">INVERTER</text>
+  <text class="lbl" x="390" y="162" text-anchor="middle">MOTOR</text>
+  <path class="ac" d="M150 34 h22"/>
+  <text class="lbl" x="178" y="38">HOT</text>
+  <path class="ln" d="M220 34 h22"/>
+  <text class="lbl" x="248" y="38">COLD</text>
+</svg></div>
+    <figcaption>Fig. 01 &nbsp;/&nbsp; Schematic illustration, not to scale</figcaption>
+  </figure>
+  <div class="wrap"><div class="stats reveal"><div class="stat"><span class="stat-v">5</span><span class="stat-l">engineers on the sub-team</span></div><div class="stat"><span class="stat-v">MATLAB</span><span class="stat-l">loop model for flow rate &amp; pressure drop</span></div><div class="stat"><span class="stat-v">T + Q</span><span class="stat-l">temperature &amp; flow sensors on the previous car</span></div></div></div>
+  <div class="wrap p-body">
+    <aside class="p-aside reveal">
+      <p class="kicker">Tools &amp; skills</p>
+      <ul class="chips"><li>MATLAB</li><li>Fluid Dynamics</li><li>Heat Transfer</li><li>Data Acquisition</li><li>Systems Integration</li><li>Team Leadership</li></ul>
+    </aside>
+    <div class="p-content">
+      <section class="p-section reveal"><h2 class="p-h2"><span>01</span>The problem</h2><p>An electric powertrain still turns a real share of its energy into heat, and that heat has to leave the car through coolant, pumps, hoses, and radiators, all of which add mass. Oversize the system and the car is heavy. Undersize it and components overheat before the end of an endurance run. The goal is a loop that is just big enough.</p></section><section class="p-section reveal"><h2 class="p-h2"><span>02</span>What I did</h2><ul class="bullets"><li>Lead a five-person sub-team: I run weekly design meetings, delegate work, and coordinate integration with the other sub-teams to build out the full-car cooling infrastructure.</li><li>Built a MATLAB model of the car&rsquo;s liquid cooling loop that predicts the flow rate each component needs and the pressure drop across it.</li><li>Use the model to give part designers optimized design targets, with the aim of minimizing total system mass.</li><li>Fitted the previous car&rsquo;s cooling system with temperature and flow-rate sensors to validate the team&rsquo;s design method against endurance performance data.</li></ul></section><section class="p-section reveal"><h2 class="p-h2"><span>03</span>Why it matters</h2><p>Pairing a predictive model with measured data from the last car means design targets are grounded in how the system actually behaved on track, not only in how it was expected to behave.</p></section>
+      
+    </div>
+  </div>
+  <nav class="wrap p-nav" aria-label="More projects">
+    <span></span>
+    <a class="next" href="tractive-battery-container.html"><small>Next up &rarr;</small><strong>Tractive Battery Container</strong></a>
+  </nav>
+</article>
+</main>
+<footer class="footer">
+  <div class="checker" aria-hidden="true"></div>
+  <div class="wrap footer-inner">
+    <span>&copy; <span data-year>2026</span> James Kurtis</span>
+    <span class="footer-links">
+      <a href="mailto:jjk349@cornell.edu">Email</a>
+      <a href="https://www.linkedin.com/in/James-Kurtis" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="../resume.html">R&eacute;sum&eacute;</a>
+    </span>
+    <a class="to-top" href="#top">Back to top &uarr;</a>
+  </div>
+</footer>
+</body>
+</html>

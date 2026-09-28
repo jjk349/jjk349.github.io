@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DCIR Cell Testing &mdash; James Kurtis</title>
+<meta name="description" content="Measured the internal resistance of lithium-polymer pouch cells to quantify their heat generation and validate the pack, cooling, and BMS design.">
+<meta name="author" content="James Kurtis">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="canonical" href="https://jjk349.github.io/projects/dcir-cell-testing.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="James Kurtis">
+<meta property="og:title" content="DCIR Cell Testing &mdash; James Kurtis">
+<meta property="og:description" content="Measured the internal resistance of lithium-polymer pouch cells to quantify their heat generation and validate the pack, cooling, and BMS design.">
+<meta property="og:url" content="https://jjk349.github.io/projects/dcir-cell-testing.html">
+<meta property="og:image" content="https://jjk349.github.io/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>document.documentElement.classList.add("js")</script>
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body class="project-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<header class="nav" data-nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="../" aria-label="James Kurtis, home">
+      <span class="brand-mark">JK</span><span class="brand-name">James Kurtis</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+      <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
+    </button>
+    <nav id="nav-menu" class="nav-menu" aria-label="Primary">
+      <a href="../#work">Work</a>
+      <a href="../#experience">Experience</a>
+      <a href="../#about">About</a>
+      <a href="../#contact">Contact</a>
+      <a class="btn btn-sm btn-red" href="../resume.html">R&eacute;sum&eacute;</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<article class="project">
+  <header class="p-hero">
+    <div class="hero-livery p-livery" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="wrap">
+      <a class="back" href="../#work"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg> All work</a>
+      <div class="p-hero-grid">
+        <div>
+          <p class="kicker">Cornell FSAE Racing &nbsp;/&nbsp; Project 06</p>
+          <h1 class="p-title">DCIR Cell Testing</h1>
+          <p class="p-lede">How much heat a battery cell makes depends on its internal resistance. I measured it on lithium-polymer pouch cells to validate the battery pack architecture, cooling, and BMS configuration.</p>
+          <ul class="chips chips-tags"><li>Batteries</li><li>Testing</li></ul>
+        </div>
+        <span class="p-num" aria-hidden="true">06</span>
+      </div>
+      <dl class="telemetry">
+      <div><dt>Cells</dt><dd>Lithium-polymer pouch</dd></div>
+      <div><dt>Measured</dt><dd>DC internal resistance</dd></div>
+      <div><dt>Output</dt><dd>Heat generation</dd></div>
+      <div><dt>Informs</dt><dd>Pack, cooling &amp; BMS</dd></div>
+      </dl>
+    </div>
+  </header>
+  <figure class="wrap p-art reveal">
+    <div class="p-art-frame"><svg class="art-svg" role="img" aria-label="Schematic illustration for DCIR Cell Testing" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <path class="faint" d="M70 170 H454 M70 210 H454 M170 36 V250 M270 36 V250 M370 36 V250"/>
+  <g class="ln">
+    <path d="M70 36 V250 H454"/>
+    <path d="M66 44 l4 -8 l4 8 M446 246 l8 4 l-8 4"/>
+    <path class="trace" d="M70 90 H200 V128 C230 132 270 138 300 140 V104 C330 96 380 92 450 91"/>
+  </g>
+  <path class="ac trace" d="M70 230 H200 V175 H300 V230 H450"/>
+  <path class="dim" d="M186 90 V128 M318 175 V230 M200 90 H180 M200 128 H180 M300 175 H324 M300 230 H324"/>
+  <text class="lbl lbl-lg" x="176" y="114" text-anchor="end">&#916;V</text>
+  <text class="lbl lbl-lg lbl-ac" x="330" y="208">&#916;I</text>
+  <text class="lbl" x="56" y="96" text-anchor="end">V</text>
+  <text class="lbl lbl-ac" x="56" y="234" text-anchor="end">I</text>
+  <text class="lbl" x="454" y="270" text-anchor="end">t</text>
+  <text class="lbl lbl-lg" x="96" y="60">R = &#916;V / &#916;I</text>
+  <g class="ln">
+    <rect class="solid" x="396" y="26" width="40" height="52" rx="4"/>
+    <rect x="404" y="18" width="8" height="8"/>
+    <rect x="420" y="18" width="8" height="8"/>
+  </g>
+  <text class="lbl" x="416" y="56" text-anchor="middle">LiPo</text>
+</svg></div>
+    <figcaption>Fig. 06 &nbsp;/&nbsp; Schematic illustration, not to scale</figcaption>
+  </figure>
+  <div class="wrap"><div class="stats reveal"><div class="stat"><span class="stat-v">R = &Delta;V/&Delta;I</span><span class="stat-l">internal resistance from a current step</span></div><div class="stat"><span class="stat-v">Q&#775; = I&sup2;R</span><span class="stat-l">heat generated under load</span></div></div></div>
+  <div class="wrap p-body">
+    <aside class="p-aside reveal">
+      <p class="kicker">Tools &amp; skills</p>
+      <ul class="chips"><li>Battery Testing</li><li>Electrical Measurement</li><li>Heat Generation</li><li>BMS</li></ul>
+    </aside>
+    <div class="p-content">
+      <section class="p-section reveal"><h2 class="p-h2"><span>01</span>The idea</h2><p>DCIR, or direct-current internal resistance, is found by stepping the current through a cell and recording how far its voltage drops. The ratio of the two is the cell&rsquo;s resistance, and the heat it produces under load scales with I&sup2;R. That makes it the link between the battery&rsquo;s electrical design and the cooling system that has to carry the heat away.</p></section><section class="p-section reveal"><h2 class="p-h2"><span>02</span>What I did</h2><ul class="bullets"><li>Performed internal resistance testing on lithium-polymer pouch cells.</li><li>Used the results to quantify how much heat the cells generate.</li><li>Applied those numbers to validate the battery pack architecture, cooling, and BMS configuration.</li></ul></section>
+      
+    </div>
+  </div>
+  <nav class="wrap p-nav" aria-label="More projects">
+    <a class="prev" href="low-voltage-box.html"><small>&larr; Previous</small><strong>Low Voltage Box</strong></a>
+    <span></span>
+  </nav>
+</article>
+</main>
+<footer class="footer">
+  <div class="checker" aria-hidden="true"></div>
+  <div class="wrap footer-inner">
+    <span>&copy; <span data-year>2026</span> James Kurtis</span>
+    <span class="footer-links">
+      <a href="mailto:jjk349@cornell.edu">Email</a>
+      <a href="https://www.linkedin.com/in/James-Kurtis" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="../resume.html">R&eacute;sum&eacute;</a>
+    </span>
+    <a class="to-top" href="#top">Back to top &uarr;</a>
+  </div>
+</footer>
+</body>
+</html>

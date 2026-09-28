@@ -1,0 +1,30 @@
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <path class="ln" d="M20 262 H460"/>
+  <rect class="ln solid" x="335" y="250" width="70" height="12"/>
+  <rect class="ln solid" x="100" y="221" width="64" height="41"/>
+  <path class="faint" d="M100 221 L164 262 M164 221 L100 262"/>
+  <g transform="rotate(7 370 250)">
+    <path class="ln solid" d="M88 206 L100 188 L170 182 L178 150 L188 150 L200 180 L265 180 L278 162 L300 162 L318 186 L400 196 L452 210 L452 218 L96 222 Z"/>
+    <circle class="ln solid" cx="236" cy="168" r="12"/>
+    <path class="ln" d="M226 166 H246"/>
+    <rect class="ln solid" x="56" y="140" width="58" height="10"/>
+    <path class="ln" d="M86 150 V188"/>
+    <path class="ln" d="M405 238 H472"/>
+    <circle class="ln solid" cx="130" cy="220" r="30"/>
+    <circle class="ln" cx="130" cy="220" r="8"/>
+    <circle class="ln solid" cx="370" cy="220" r="30"/>
+    <circle class="ln" cx="370" cy="220" r="8"/>
+    <circle class="ac solid" cx="250" cy="196" r="11"/>
+    <path class="fa" d="M250 196 V185 A11 11 0 0 1 261 196 Z"/>
+    <path class="fa" d="M250 196 V207 A11 11 0 0 1 239 196 Z"/>
+  </g>
+  <path class="dim" d="M370 250 H236"/>
+  <path class="ac" d="M280 250 A90 90 0 0 1 280.7 239"/>
+  <text class="lbl lbl-ac" x="262" y="247">&#952;</text>
+  <path class="dim" d="M257.5 196 V262"/>
+  <text class="lbl" x="226" y="232">h</text>
+  <text class="lbl" x="370" y="284" text-anchor="middle">SCALE</text>
+  <text class="lbl" x="132" y="284" text-anchor="middle">LIFT</text>
+  <text class="lbl" x="20" y="40">CG HEIGHT / TILT</text>
+  <path class="faint" d="M20 46 H150"/>
+</svg>

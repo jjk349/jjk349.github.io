@@ -1,0 +1,22 @@
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <path class="faint" d="M70 170 H454 M70 210 H454 M170 36 V250 M270 36 V250 M370 36 V250"/>
+  <g class="ln">
+    <path d="M70 36 V250 H454"/>
+    <path d="M66 44 l4 -8 l4 8 M446 246 l8 4 l-8 4"/>
+    <path class="trace" d="M70 90 H200 V128 C230 132 270 138 300 140 V104 C330 96 380 92 450 91"/>
+  </g>
+  <path class="ac trace" d="M70 230 H200 V175 H300 V230 H450"/>
+  <path class="dim" d="M186 90 V128 M318 175 V230 M200 90 H180 M200 128 H180 M300 175 H324 M300 230 H324"/>
+  <text class="lbl lbl-lg" x="176" y="114" text-anchor="end">&#916;V</text>
+  <text class="lbl lbl-lg lbl-ac" x="330" y="208">&#916;I</text>
+  <text class="lbl" x="56" y="96" text-anchor="end">V</text>
+  <text class="lbl lbl-ac" x="56" y="234" text-anchor="end">I</text>
+  <text class="lbl" x="454" y="270" text-anchor="end">t</text>
+  <text class="lbl lbl-lg" x="96" y="60">R = &#916;V / &#916;I</text>
+  <g class="ln">
+    <rect class="solid" x="396" y="26" width="40" height="52" rx="4"/>
+    <rect x="404" y="18" width="8" height="8"/>
+    <rect x="420" y="18" width="8" height="8"/>
+  </g>
+  <text class="lbl" x="416" y="56" text-anchor="middle">LiPo</text>
+</svg>

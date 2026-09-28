@@ -1,0 +1,21 @@
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <g class="ln">
+    <path class="solid" d="M100 130 L180 80 H380 L300 130 Z"/>
+    <path class="solid" d="M300 130 L380 80 V190 L300 240 Z"/>
+    <path class="solid" d="M100 130 H300 V240 H100 Z"/>
+    <path d="M100 228 H80 V244 H100"/>
+    <circle cx="88" cy="236" r="3"/>
+    <path d="M380 176 H400 V192 H380"/>
+    <circle cx="392" cy="184" r="3"/>
+  </g>
+  <path class="faint" d="M140 130 L220 80 M180 130 L260 80 M220 130 L300 80 M260 130 L340 80 M140 105 H340"/>
+  <g class="ac">
+    <path d="M200 160 L226 204 H174 Z"/>
+    <path d="M203 170 L193 187 H204 L197 198"/>
+  </g>
+  <path class="dim" d="M100 254 V270 M300 254 V270 M100 262 H300"/>
+  <path class="ln" d="M108 258 l-8 4 l8 4 M292 258 l8 4 l-8 4"/>
+  <text class="lbl lbl-ac" x="200" y="288" text-anchor="middle">&#8722;1.0 KG  /  &#8722;10%</text>
+  <text class="lbl" x="100" y="52">HV CONTAINER</text>
+  <path class="faint" d="M100 58 H200"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="ply0"><path d="M110 200 H350 L410 164 H170 Z"/></clipPath>
+    <clipPath id="ply1"><path d="M110 172 H350 L410 136 H170 Z"/></clipPath>
+    <clipPath id="ply2"><path d="M110 144 H350 L410 108 H170 Z"/></clipPath>
+    <clipPath id="ply3"><path d="M110 116 H350 L410 80 H170 Z"/></clipPath>
+  </defs>
+  <path class="ln solid" d="M110 200 H350 L410 164 H170 Z"/>
+  <path class="faint" clip-path="url(#ply0)" d="M100 194 H420 M100 188 H420 M100 182 H420 M100 176 H420 M100 170 H420"/>
+  <path class="ln solid" d="M110 172 H350 L410 136 H170 Z"/>
+  <path class="faint" clip-path="url(#ply1)" d="M100 196 L160 136 M130 196 L190 136 M160 196 L220 136 M190 196 L250 136 M220 196 L280 136 M250 196 L310 136 M280 196 L340 136 M310 196 L370 136 M340 196 L400 136 M370 196 L430 136"/>
+  <path class="ln solid" d="M110 144 H350 L410 108 H170 Z"/>
+  <path class="faint" clip-path="url(#ply2)" d="M120 144 L180 108 M144 144 L204 108 M168 144 L228 108 M192 144 L252 108 M216 144 L276 108 M240 144 L300 108 M264 144 L324 108 M288 144 L348 108 M312 144 L372 108 M336 144 L396 108"/>
+  <path class="ac solid" d="M110 116 H350 L410 80 H170 Z"/>
+  <path class="faint" clip-path="url(#ply3)" d="M100 80 L160 140 M130 80 L190 140 M160 80 L220 140 M190 80 L250 140 M220 80 L280 140 M250 80 L310 140 M280 80 L340 140 M310 80 L370 140 M340 80 L400 140 M370 80 L430 140"/>
+  <text class="lbl" x="420" y="186">0&#176;</text>
+  <text class="lbl" x="420" y="158">45&#176;</text>
+  <text class="lbl" x="420" y="130">90&#176;</text>
+  <text class="lbl lbl-ac" x="420" y="102">&#8722;45&#176;</text>
+  <g class="ac">
+    <path d="M260 292 C230 292 222 262 238 244 C240 258 248 262 252 256 C246 236 258 222 268 214 C266 232 288 240 284 264 C282 282 272 292 260 292 Z"/>
+    <path d="M261 288 C250 288 246 276 252 268 C254 274 258 276 260 272 C258 262 264 256 268 252 C268 262 276 266 274 276 C272 284 268 288 261 288 Z"/>
+  </g>
+  <path class="ln" d="M300 94 V56 H436"/>
+  <circle class="badge" cx="446" cy="56" r="9"/>
+  <text class="lbl badge-t" x="446" y="60" text-anchor="middle">T</text>
+  <text class="lbl" x="40" y="40">LAYUP / FLAME</text>
+  <path class="faint" d="M40 46 H150"/>
+</svg>

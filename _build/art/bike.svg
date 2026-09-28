@@ -1,0 +1,34 @@
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <path class="faint" d="M30 258 H450"/>
+  <circle class="faint" cx="118" cy="196" r="54"/>
+  <circle class="faint" cx="362" cy="196" r="54"/>
+  <g class="ln">
+    <circle cx="118" cy="196" r="62"/>
+    <circle cx="362" cy="196" r="62"/>
+    <circle cx="118" cy="196" r="5"/>
+    <circle cx="362" cy="196" r="5"/>
+    <path d="M330 124 Q346 170 362 196"/>
+    <path d="M200 100 L196 78"/>
+    <path class="thick" d="M178 76 H214"/>
+    <path d="M322 94 L318 80 L338 76"/>
+    <path d="M338 76 q16 0 16 14"/>
+    <circle class="solid" cx="220" cy="206" r="13"/>
+    <path d="M220 206 L232 230 M224 232 H242"/>
+  </g>
+  <g class="ac frame">
+    <path d="M220 206 L200 100"/>
+    <path d="M200 100 L322 94"/>
+    <path d="M220 206 L330 124"/>
+    <path d="M220 206 L118 196"/>
+    <path d="M200 100 L118 196"/>
+    <path class="thick" d="M322 94 L330 124"/>
+  </g>
+  <path class="dim" d="M330 124 L366 258"/>
+  <path class="ac" d="M340 258 A26 26 0 0 1 359.3 232.9"/>
+  <text class="lbl lbl-ac" x="318" y="252">HA</text>
+  <path class="dim" d="M118 280 H362"/>
+  <path class="ln" d="M118 272 V288 M362 272 V288"/>
+  <text class="lbl" x="240" y="275" text-anchor="middle">WHEELBASE</text>
+  <text class="lbl" x="30" y="40">FRAME GEOMETRY</text>
+  <path class="faint" d="M30 46 H150"/>
+</svg>

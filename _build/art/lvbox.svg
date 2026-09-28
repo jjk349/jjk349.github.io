@@ -1,0 +1,29 @@
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+  <path class="dim" d="M110 150 V98 M330 150 V98 M390 115 V63"/>
+  <g class="ln">
+    <path class="solid" d="M110 90 L170 55 H390 L330 90 Z"/>
+    <path class="solid" d="M110 90 V98 H330 V90 M330 98 L390 63 V55"/>
+    <circle cx="132" cy="86" r="3"/><circle cx="312" cy="86" r="3"/>
+    <circle cx="186" cy="60" r="3"/><circle cx="366" cy="60" r="3"/>
+    <path class="solid" d="M110 150 L170 115 H390 L330 150 Z"/>
+    <path class="solid" d="M330 150 L390 115 V205 L330 240 Z"/>
+    <path class="solid" d="M110 150 H330 V240 H110 Z"/>
+    <circle cx="150" cy="195" r="13"/><circle cx="150" cy="195" r="5"/>
+    <circle cx="192" cy="195" r="13"/><circle cx="192" cy="195" r="5"/>
+    <rect x="232" y="184" width="70" height="22" rx="2"/>
+  </g>
+  <path class="faint" d="M242 190 v10 M252 190 v10 M262 190 v10 M272 190 v10 M282 190 v10 M292 190 v10"/>
+  <g class="ac">
+    <path d="M140 145 L184 120 H352 L308 145 Z"/>
+    <path d="M196 138 l8 -5 h26 l-8 5 Z"/>
+    <path d="M248 138 l8 -5 h18 l-8 5 Z"/>
+    <path d="M286 138 l8 -5 h30 l-8 5 Z"/>
+    <path d="M220 128 l6 -4 h16 l-6 4 Z"/>
+    <path d="M150 208 C150 262 96 250 60 282"/>
+    <path d="M192 208 C192 270 120 262 84 290"/>
+  </g>
+  <text class="lbl" x="110" y="36">ARG25 / LV BOX</text>
+  <path class="faint" d="M110 42 H214"/>
+  <text class="lbl" x="400" y="164">ENCL.</text>
+  <text class="lbl" x="400" y="84">LID</text>
+</svg>
