@@ -159,7 +159,7 @@ def hero():
         <h1 id="hero-name" class="hero-name"><span class="line"><span>{SITE['first']}</span></span><span class="line"><span>{SITE['last']}</span></span></h1>
         <p class="hero-lede">{SITE['lede']}</p>
         <div class="hero-cta">
-          <a class="btn btn-solid" href="#work">See the work {ICONS['arrow']}</a>
+          <a class="btn btn-solid" href="#work">See my work {ICONS['arrow']}</a>
           <a class="btn btn-outline" href="{SITE['resume_pdf']}" download>Download r&eacute;sum&eacute; {ICONS['download']}</a>
         </div>
         <ul class="socials" aria-label="Contact links">
@@ -224,11 +224,11 @@ def projects(n):
             cards.append(card(p, index, di % 3))
         count = f"{len(items)} project" + ("" if len(items) == 1 else "s")
         layout = {1: "grid grid-solo", 2: "grid grid-duo"}.get(len(items), "grid")
+        sub_intro = f'\n        <p class="sub-intro">{cat["intro"]}</p>' if cat.get("intro") else ""
         subs.append(f"""<div class="subsection" id="{cat['id']}">
     <header class="sub-head reveal">
       <div>
-        <h3 class="sub-title">{cat['name']}</h3>
-        <p class="sub-intro">{cat['intro']}</p>
+        <h3 class="sub-title">{cat['name']}</h3>{sub_intro}
       </div>
       <span class="sub-count">{count}</span>
     </header>
@@ -237,7 +237,7 @@ def projects(n):
     </div>
   </div>""")
     total = f"{len(PROJECTS)} projects"
-    intro = "Selected engineering work. Open a project for the full write-up."
+    intro = "Open a project for the full write-up."
     return f"""<section class="section" id="work" aria-labelledby="work-h">
   <div class="wrap">
   {sec_head(num(n), total, "My Projects", "work-h", intro)}
@@ -335,7 +335,7 @@ def contact(n):
   <div class="wrap">
     <div class="contact-inner reveal">
       <p class="kicker"><span class="sec-num">{num(n)}</span>Contact</p>
-      <h2 id="contact-h" class="contact-title">Let&rsquo;s build something <span class="hl">fast.</span></h2>
+      <h2 id="contact-h" class="contact-title">Get in <span class="hl">touch</span></h2>
       <p class="contact-sub">{SITE['availability']} for summer internships. Email is the quickest way to reach me.</p>
       <a class="big-mail" href="mailto:{SITE['email']}">{SITE['email']} {ICONS['arrow-ne']}</a>
       <div class="contact-actions">

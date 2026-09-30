@@ -91,7 +91,7 @@ CATEGORIES = [
         "id": "other",
         "name": "Other Projects",
         "kicker": "Category 02",
-        "intro": "Engineering work outside the race team.",
+        "intro": "",
     },
 ]
 
