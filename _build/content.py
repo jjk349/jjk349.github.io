@@ -20,10 +20,10 @@ SITE = {
         "high-voltage systems for an electric race car."
     ),
     "lede": (
-        "Cooling Sub-team Lead at Cornell Racing FSAE. I design, build, and test the "
-        "systems that keep an electric race car cool, light, and safe."
+        "Mechanical Engineer with a passion for automotive design. "
+        "Cooling Sub-team Lead at Cornell Racing FSAE."
     ),
-    "location": "Ithaca, NY",
+    "location": "Rockville Centre, New York",
     "availability": "Available May&ndash;Aug 2027",
     "email": "jjk349@cornell.edu",
     "linkedin": "https://www.linkedin.com/in/James-Kurtis",
@@ -36,19 +36,26 @@ SITE = {
 FACTS = [
     ("Currently", "Cooling Sub-team Lead, Cornell Racing FSAE"),
     ("Studying", "B.S. Mechanical Engineering, Cornell &rsquo;28"),
-    ("Based in", "Ithaca, NY"),
+    ("Based in", "Rockville Centre, New York"),
     ("Status", "Available May&ndash;Aug 2027"),
 ]
 
+# "About Me" section at the top of the page. The first paragraph is shown larger.
 ABOUT = [
-    "I&rsquo;m a Mechanical Engineering student at Cornell University, minoring in Business "
-    "for Engineers. On Cornell Racing FSAE I lead the cooling sub-team, and my work on the "
-    "team spans the car&rsquo;s cooling system, its high-voltage accumulator, and battery "
-    "cell testing.",
-    "Working hands-on where mechanical and electrical engineering meet has given me a "
-    "particular interest in electric vehicles, and in the thermal and battery systems "
-    "that make them work.",
+    "I&rsquo;m James Kurtis, a mechanical engineer studying at Cornell University, with "
+    "a passion for motorsports and automotive design. I&rsquo;m especially interested in "
+    "pushing the boundaries of engineering in energy, defense, and transportation.",
+    "I&rsquo;m skilled in CAD, FEA, machining, and programming, and my work so far has "
+    "taken me across many branches of engineering, including high-voltage electronics, "
+    "structural design, and thermal systems.",
+    "My goal is to expand the limits of modern technology, and to keep learning as much "
+    "as I can so I grow as both an engineer and a leader.",
 ]
+
+ABOUT_PHOTO = {
+    "src": "assets/img/working-on-car.jpg",
+    "alt": "James Kurtis lying on a creeper, working on the underside of a race car",
+}
 
 INTERESTS = [
     "Formula One", "Electric Vehicles", "Mixed Martial Arts", "Karting",
@@ -72,7 +79,7 @@ INTERESTS = [
 CATEGORIES = [
     {
         "id": "fsae",
-        "name": "Cornell FSAE Racing",
+        "name": "Cornell Racing FSAE",
         "kicker": "Category 01",
         "intro": (
             "Cornell Racing designs, builds, and races an electric Formula SAE car. "

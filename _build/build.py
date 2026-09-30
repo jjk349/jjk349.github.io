@@ -19,8 +19,8 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
 from content import (  # noqa: E402
-    ABOUT, CATEGORIES, EDUCATION, EXPERIENCE, FACTS, INTERESTS, LEADERSHIP, PROJECTS,
-    SITE, SKILLS,
+    ABOUT, ABOUT_PHOTO, CATEGORIES, EDUCATION, EXPERIENCE, FACTS, INTERESTS, LEADERSHIP,
+    PROJECTS, SITE, SKILLS,
 )
 
 FONTS = (
@@ -80,9 +80,9 @@ def nav(root, home):
       <span class="bars" aria-hidden="true"><span></span><span></span></span><span class="sr">Menu</span>
     </button>
     <nav id="nav-menu" class="nav-menu" aria-label="Primary">
-      <a href="{base}#work">Work</a>
-      <a href="{base}#experience">Experience</a>
       <a href="{base}#about">About</a>
+      <a href="{base}#work">Projects</a>
+      <a href="{base}#experience">Experience</a>
       <a href="{base}#contact">Contact</a>
       <a class="btn btn-sm btn-outline" href="{root}resume.html">R&eacute;sum&eacute;</a>
     </nav>
@@ -167,7 +167,7 @@ def hero():
           <li><a href="{SITE['linkedin']}" target="_blank" rel="noopener">{ICONS['linkedin']}<span>LinkedIn</span></a></li>
         </ul>
       </div>
-      <figure class="hero-photo">
+      <figure class="framed hero-photo">
         <div class="photo-frame"><img src="{SITE['photo']}" alt="Portrait of {SITE['name']}" width="693" height="1145" fetchpriority="high"></div>
       </figure>
     </div>
@@ -213,10 +213,10 @@ def card(p, index, delay):
 </article>"""
 
 
-def work_sections():
-    out = []
+def projects(n):
+    subs = []
     index = 0
-    for ci, cat in enumerate(CATEGORIES, start=1):
+    for cat in CATEGORIES:
         items = [p for p in PROJECTS if p["category"] == cat["id"]]
         cards = []
         for di, p in enumerate(items):
@@ -224,15 +224,26 @@ def work_sections():
             cards.append(card(p, index, di % 3))
         count = f"{len(items)} project" + ("" if len(items) == 1 else "s")
         layout = {1: "grid grid-solo", 2: "grid grid-duo"}.get(len(items), "grid")
-        out.append(f"""<section class="section" id="{cat['id']}" aria-labelledby="{cat['id']}-h">
-  <div class="wrap">
-  {sec_head(num(ci), count, cat['name'], cat['id'] + '-h', cat['intro'])}
-  <div class="{layout}">
+        subs.append(f"""<div class="subsection" id="{cat['id']}">
+    <header class="sub-head reveal">
+      <div>
+        <h3 class="sub-title">{cat['name']}</h3>
+        <p class="sub-intro">{cat['intro']}</p>
+      </div>
+      <span class="sub-count">{count}</span>
+    </header>
+    <div class="{layout}">
 {chr(10).join(cards)}
+    </div>
+  </div>""")
+    total = f"{len(PROJECTS)} projects"
+    intro = "Selected engineering work. Open a project for the full write-up."
+    return f"""<section class="section" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+  {sec_head(num(n), total, "My Projects", "work-h", intro)}
+  {chr(10).join(subs)}
   </div>
-  </div>
-</section>""")
-    return '<div id="work">\n' + "\n".join(out) + "\n</div>"
+</section>"""
 
 
 def acc_row(e, open_=False):
@@ -264,44 +275,56 @@ def experience(n):
 </section>"""
 
 
-def about(n):
+def about_me(n):
     paras = "".join(
         f'<p class="{"about-lead" if i == 0 else ""}">{t}</p>' for i, t in enumerate(ABOUT)
     )
     interests = "".join(f"<li>{x}</li>" for x in INTERESTS)
+    return f"""<section class="section about-me" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <div class="about-me-grid">
+      <div class="about-copy reveal">
+        <p class="kicker"><span class="sec-num">{num(n)}</span>Introduction</p>
+        <h2 id="about-h" class="sec-title">About Me</h2>
+        {paras}
+        <p class="mini">Outside of engineering</p>
+        <ul class="chips">{interests}</ul>
+      </div>
+      <figure class="framed about-photo reveal">
+        <div class="photo-frame"><img src="{ABOUT_PHOTO['src']}" alt="{ABOUT_PHOTO['alt']}" width="960" height="1280" loading="lazy"></div>
+      </figure>
+    </div>
+  </div>
+</section>"""
+
+
+def education_skills(n):
     courses = "".join(f"<li>{x}</li>" for x in EDUCATION["courses"])
     skills = "".join(
         f'<div class="skill-group"><h4>{g}</h4><ul class="chips">{"".join(f"<li>{s}</li>" for s in items)}</ul></div>'
         for g, items in SKILLS
     )
-    return f"""<section class="section" id="about" aria-labelledby="about-h">
+    return f"""<section class="section" id="skills" aria-labelledby="skills-h">
   <div class="wrap">
-  {sec_head(num(n), "Background", "About", "about-h")}
-  <div class="about-grid">
-    <div class="about-copy reveal">
-      {paras}
-      <h3 class="mini">Outside of engineering</h3>
-      <ul class="chips">{interests}</ul>
-    </div>
-    <div class="about-side">
-      <article class="panel reveal">
-        <p class="mini">Education</p>
-        <h3 class="panel-title">{EDUCATION['school']}</h3>
-        <p class="panel-sub">{EDUCATION['degree']} &nbsp;&middot;&nbsp; {EDUCATION['minor']}</p>
-        <dl class="mini-stats">
-          <div><dt>GPA</dt><dd>{EDUCATION['gpa']}</dd></div>
-          <div><dt>Graduation</dt><dd>{EDUCATION['grad'].replace('Expected ', '')}</dd></div>
-        </dl>
-        <details class="courses">
-          <summary>Relevant coursework</summary>
-          <ul class="chips">{courses}</ul>
-        </details>
-      </article>
-      <article class="panel reveal">
-        <p class="mini">Tools &amp; skills</p>
-        {skills}
-      </article>
-    </div>
+  {sec_head(num(n), "Background", "Education &amp; Skills", "skills-h")}
+  <div class="edu-grid">
+    <article class="panel reveal">
+      <p class="mini">Education</p>
+      <h3 class="panel-title">{EDUCATION['school']}</h3>
+      <p class="panel-sub">{EDUCATION['degree']} &nbsp;&middot;&nbsp; {EDUCATION['minor']}</p>
+      <dl class="mini-stats">
+        <div><dt>GPA</dt><dd>{EDUCATION['gpa']}</dd></div>
+        <div><dt>Graduation</dt><dd>{EDUCATION['grad'].replace('Expected ', '')}</dd></div>
+      </dl>
+      <details class="courses">
+        <summary>Relevant coursework</summary>
+        <ul class="chips">{courses}</ul>
+      </details>
+    </article>
+    <article class="panel reveal" style="--i:1">
+      <p class="mini">Tools &amp; skills</p>
+      {skills}
+    </article>
   </div>
   </div>
 </section>"""
@@ -326,13 +349,13 @@ def contact(n):
 
 
 def build_index():
-    n_cats = len(CATEGORIES)
     body = "\n".join([
         hero(),
-        work_sections(),
-        experience(n_cats + 1),
-        about(n_cats + 2),
-        contact(n_cats + 3),
+        about_me(1),
+        projects(2),
+        experience(3),
+        education_skills(4),
+        contact(5),
     ])
     return page(
         title=f"{SITE['name']} &mdash; Mechanical Engineer",
@@ -394,7 +417,7 @@ def project_page(p, index, prev_p, next_p):
     body = f"""<article class="project">
   <header class="p-hero">
     <div class="wrap">
-      <a class="back" href="../#work">{ICONS['back']} All work</a>
+      <a class="back" href="../#work">{ICONS['back']} All projects</a>
       <p class="kicker"><span class="sec-num">{n}</span>{cat}</p>
       <h1 class="p-title">{p['title']}</h1>
       <p class="p-lede">{p['lede']}</p>
