@@ -335,7 +335,7 @@ def contact(n):
   <div class="wrap">
     <div class="contact-inner reveal">
       <p class="kicker"><span class="sec-num">{num(n)}</span>Contact</p>
-      <h2 id="contact-h" class="contact-title">Get in <span class="hl">touch</span></h2>
+      <h2 id="contact-h" class="contact-title">Get in touch</h2>
       <p class="contact-sub">{SITE['availability']} for summer internships. Email is the quickest way to reach me.</p>
       <a class="big-mail" href="mailto:{SITE['email']}">{SITE['email']} {ICONS['arrow-ne']}</a>
       <div class="contact-actions">
